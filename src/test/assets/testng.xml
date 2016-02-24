@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Dialog" verbose="1">
+
+
+    <test name="test Dialog.class">
+        <classes>
+            <class name="com.radius.Dialog">
+                <methods>
+                    <include name="checkDisableChatBtn"/>
+                    <include name="createChatFromDialogTab"/>
+                    <include name="createChatFromGroupTab"/>
+                    <include name="checkContactsChatStructure" />
+                    <!--<include name="createChatDialog"/>-->
+                    <include name="createChatFromContactList"/>
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--<test name="test Messaging.class">-->
+        <!--<classes>-->
+
+            <!--<class name="com.radius.Messaging">-->
+                <!--<methods>-->
+                    <!--<include name="dialogSendImageMsg"/>-->
+                    <!--<include name="dialogSendGeoMsg"/>-->
+                    <!--<include name="checkDialogSendMsgStatus"/>-->
+
+                <!--</methods>-->
+            <!--</class>-->
+
+        <!--</classes>-->
+    <!--</test>-->
+</suite>
+
