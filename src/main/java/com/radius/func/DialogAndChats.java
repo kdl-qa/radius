@@ -39,6 +39,7 @@ public class DialogAndChats {
     public static String sentanceMsg = "Hi, nice to chat with you on Talker!";
     public static final String msgStatus0 = "Доставлено";
     public static final String msgStatus1 = "Прочитано";
+    public static final String msgStatus2 = "Не доставлено";
 
 
     public boolean tapActionBarTab(int index) {

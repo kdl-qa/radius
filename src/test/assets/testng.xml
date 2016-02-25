@@ -19,19 +19,19 @@
         </classes>
     </test>
 
-    <!--<test name="test Messaging.class">-->
-        <!--<classes>-->
+    <test name="test Messaging.class">
+        <classes>
 
-            <!--<class name="com.radius.Messaging">-->
-                <!--<methods>-->
-                    <!--<include name="dialogSendImageMsg"/>-->
-                    <!--<include name="dialogSendGeoMsg"/>-->
-                    <!--<include name="checkDialogSendMsgStatus"/>-->
+            <class name="com.radius.Messaging">
+                <methods>
+                    <include name="dialogSendImageMsg"/>
+                    <include name="dialogSendGeoMsg"/>
+                    <include name="checkDialogSendMsgStatus"/>
 
-                <!--</methods>-->
-            <!--</class>-->
+                </methods>
+            </class>
 
-        <!--</classes>-->
-    <!--</test>-->
+        </classes>
+    </test>
 </suite>
 
