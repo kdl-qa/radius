@@ -1,11 +1,12 @@
 package com.radius;
 
 import com.radius.config.Driver;
-import com.radius.data.DialogAndChats;
+import com.radius.func.DialogAndChats;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -17,9 +18,10 @@ public class Groups {
     public static TouchActions touchScreen;
     DialogAndChats chatsTester;
 
-    Groups() {
+    @BeforeClass
+    public void group() {
         driver = Driver.initDriver();
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
         chatsTester = new DialogAndChats(driver, wait, touchScreen);
     }

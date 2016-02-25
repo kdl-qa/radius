@@ -1,4 +1,4 @@
-package com.radius.page_object.android;
+package com.radius.data;
 
 /**
  * Created by kdl on 18.02.16.

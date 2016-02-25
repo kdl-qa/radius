@@ -1,4 +1,4 @@
-package com.radius.page_object.android;
+package com.radius.data;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -57,7 +57,8 @@ public class Chats {
     @FindBy(id = "design_navigation_view")
     public static WebElement sideBar;
 
-    @FindBy(id = "design_menu_item_text")
+//    @FindBy(id = "design_menu_item_text")
+    @FindBy(className = "android.widget.CheckedTextView")
     public static List<WebElement> sideBarMenuItems;
 
     /*============================Msg Box==========================*/
@@ -96,6 +97,13 @@ public class Chats {
 
     @FindBy(id = "text_view_status")
     public static WebElement msgStatus;
+
+    @FindBy(id = "user_name")
+    public static List<WebElement> chatUsernames;
+
+    @FindBy(id = "image_view_avatar")
+    public static List<WebElement> chatAvatars;
+
 
     /*========================Attach List=============================*/
 

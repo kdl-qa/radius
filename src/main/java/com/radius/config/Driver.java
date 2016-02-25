@@ -1,7 +1,7 @@
 package com.radius.config;
 
-import com.radius.page_object.android.Chats;
-import com.radius.page_object.android.Contacts;
+import com.radius.data.Chats;
+import com.radius.data.Contacts;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;

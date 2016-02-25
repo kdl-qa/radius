@@ -1,4 +1,4 @@
-package com.radius.page_object.android;
+package com.radius.data;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

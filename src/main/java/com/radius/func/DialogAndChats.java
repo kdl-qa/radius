@@ -1,7 +1,7 @@
-package com.radius.data;
+package com.radius.func;
 
-import com.radius.page_object.android.Chats;
-import com.radius.page_object.android.Contacts;
+import com.radius.data.Chats;
+import com.radius.data.Contacts;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -66,6 +66,7 @@ public class DialogAndChats {
     }
 
     public boolean tapSideBarMenuText(String text) {
+        tapMenuIcon();
         if (Chats.sideBar.isDisplayed()){
             for (WebElement item : Chats.sideBarMenuItems)
                 if (item.getText().equalsIgnoreCase(text)) {
@@ -91,8 +92,8 @@ public class DialogAndChats {
     }
 
     public boolean openDialogByName(String name) {
+        wait.until(ExpectedConditions.visibilityOf(Chats.dialogListView));
         if (Chats.actionBar.isDisplayed() & Chats.chatsScreenTitle.isDisplayed()) {
-            wait.until(ExpectedConditions.visibilityOf(Chats.dialogListView));
             if (Chats.dialogName.isEmpty()) {
                 System.out.println("You don't have any chats");
             } else {
@@ -172,6 +173,7 @@ public class DialogAndChats {
             if (!Chats.list.isEmpty()) {
                 Chats.list.get(album).click();
                 for (int i = 0; i < count; ++i) {
+                    System.out.println(i);
                     Chats.list.get(i).click();
                 }
                 Chats.gallerySubmit.click();
@@ -211,6 +213,14 @@ public class DialogAndChats {
 
     /*======================= Groups ==========================*/
 
+    public boolean openChatDialogByUsername(String username){
+        for (WebElement user : Chats.chatUsernames)
+            if (user.getText().equalsIgnoreCase(username)){
+                user.click();
+                break;
+            } else continue;
+        return true;
+    }
 
 
 }

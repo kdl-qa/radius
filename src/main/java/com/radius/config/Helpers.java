@@ -1,9 +1,6 @@
 package com.radius.config;
 
-import com.radius.page_object.android.Chats;
-import com.radius.page_object.android.Contacts;
-import com.radius.page_object.android.ScreenTitles;
-import com.radius.page_object.android.Tabs;
+import com.radius.data.*;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -84,6 +81,32 @@ public class Helpers {
         return true;
     }
 
+    public boolean openMenuItem(MenuItems menu_item) {
+        Chats.menuIcon.click();
+        switch (menu_item) {
+            case CHATS:
+                wait.until(ExpectedConditions.visibilityOf(Chats.sideBarMenuItems.get(0)));
+                Chats.sideBarMenuItems.get(0).click();
+                return Chats.s_text.getText().equalsIgnoreCase("Чаты");
+            case VENUES:
+                Chats.sideBarMenuItems.get(1).click();
+//                wait.until(ExpectedConditions.visibilityOf(Chats.actionTabs.get(1)));
+                return Chats.s_text.getText().equalsIgnoreCase("Места");
+            case CONTACTS:
+                Chats.sideBarMenuItems.get(2).click();
+//                wait.until(ExpectedConditions.visibilityOf(Chats.actionTabs.get(2)));
+                return Chats.s_text.getText().equalsIgnoreCase("Контакты");
+            case SETTINGS:
+                Chats.sideBarMenuItems.get(3).click();
+                return Chats.s_text.getText().equalsIgnoreCase("Настройки");
+            case ABOUT_APP:
+                Chats.sideBarMenuItems.get(4).click();
+                return Chats.s_text.getText().equalsIgnoreCase("Информация о приложении");
+            default:
+                return false;
+        }
+    }
+
     public boolean openActionTab(Tabs expectedTab) {
         switch (expectedTab) {
             case MAIN_CONTACTS_TAB:
@@ -104,6 +127,8 @@ public class Helpers {
                 return false;
         }
     }
+
+
 
     public boolean createChat() {
         wait.until(ExpectedConditions.visibilityOf(Chats.createChatBtn));
