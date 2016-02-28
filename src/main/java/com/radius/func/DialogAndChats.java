@@ -12,17 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-//public class DialogAndChats {
-//
-//    public static String simpleMsg = "abcdefghijklmnopqrstuvwxyz";
-//    public static String sentanceMsg = "Hi, nice to chat with you on Talker!";
-//
-//    public static final String  msgStatus0 = "Доставлено";
-//    public static final String msgStatus1 = "Прочитано";
-//
-//    /**
-//     * Created by kdl on 02.02.16.
-//     */
 public class DialogAndChats {
     private AndroidDriver driver;
     private WebDriverWait wait;

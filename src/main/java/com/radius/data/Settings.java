@@ -25,7 +25,7 @@ public class Settings {
     public static WebElement myMainName;
 
     @FindBy(id = "main_edit")
-    public static WebElement mainEditBtn;
+    public static WebElement mainProfileEditBtn;
 
     /*==================== Public Profile ====================*/
 
@@ -36,7 +36,7 @@ public class Settings {
     public static WebElement myPublicName;
 
     @FindBy(id = "public_edit")
-    public static WebElement publicEditBtn;
+    public static WebElement publicProfileEditBtn;
 
     /*====================== Edit Profile =========================*/
 

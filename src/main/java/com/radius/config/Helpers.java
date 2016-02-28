@@ -183,9 +183,11 @@ public class Helpers {
                 wait.until(ExpectedConditions.visibilityOf(Chats.actionBar));
                 return Chats.s_text.getText().equals(expectedScreenTitle);
             case CONTACTS_SCREEN:
+            case CONTACT_PROFILE_SCREEN:
                 wait.until(ExpectedConditions.visibilityOf(Chats.actionBar));
                 return Chats.s_text.getText().equals(expectedScreenTitle);
-            case CONTACT_PROFILE_SCREEN:
+            case SETTINGS_SCREEN:
+            case EDIT_PROFILE_SCREEN:
                 wait.until(ExpectedConditions.visibilityOf(Chats.actionBar));
                 return Chats.s_text.getText().equals(expectedScreenTitle);
             default:
@@ -230,4 +232,5 @@ public class Helpers {
         }
         return true;
     }
+
 }
