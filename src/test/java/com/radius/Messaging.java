@@ -34,7 +34,7 @@ public class Messaging {
         wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
         chatsTester = new DialogAndChats(driver, wait, touchScreen);
-        helper = new Helpers(driver, wait);
+        helper = new Helpers(driver, wait,touchScreen);
     }
 
     @Description("Send in dialog Geo message")

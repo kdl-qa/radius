@@ -4,10 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by kdl on 26.02.16.
+ * Created by kdl on 28.02.16.
  */
-public class Settings {
-
+public class Account {
     /*===================== Common =====================*/
 
     //todo: xpath Main and public blocks (class = android.widget.TextView)
@@ -54,8 +53,5 @@ public class Settings {
 
     @FindBy(id = "profile_update_fab")
     public static WebElement update_profileBtn;
-
-
-
 
 }

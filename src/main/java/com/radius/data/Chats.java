@@ -12,6 +12,8 @@ public class Chats {
 
     /*====================== Dialog & Group =========================*/
 
+    @FindBy(id = "exit_button")
+    public static WebElement logoutBtn;
 
 
     /*============================ Navigation =============================*/

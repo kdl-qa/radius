@@ -23,7 +23,7 @@ public class Helpers {
     private TouchActions touchScreen;
     private AndroidDriver driver;
 
-    public Helpers(AndroidDriver driver, WebDriverWait wait) {
+    public Helpers(AndroidDriver driver, WebDriverWait wait,TouchActions touchScreen) {
         this.driver = driver;
         this.wait = wait;
         this.touchScreen = touchScreen;
@@ -233,4 +233,7 @@ public class Helpers {
         return true;
     }
 
+    public void logout() {
+        Account.logoutBtn.click();
+    }
 }

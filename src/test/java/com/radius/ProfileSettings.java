@@ -24,15 +24,15 @@ public class ProfileSettings {
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
     Helpers helper;
-    UserSettings tester;
+    UserSettings accountTester;
 
     @BeforeClass
     public void settings() {
         driver = Driver.initDriver();
-        tester = new UserSettings(driver, wait, touchScreen);
         wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
-        helper = new Helpers(driver, wait);
+        helper = new Helpers(driver, wait, touchScreen);
+        accountTester = new UserSettings(driver, wait, touchScreen);
     }
 
 
@@ -41,12 +41,10 @@ public class ProfileSettings {
     public void editMainUsername(String editMainUsername) throws InterruptedException {
         assertTrue(helper.openMenuItem(SETTINGS));
         assertTrue(helper.checkScreenTitle(SETTINGS_SCREEN, "Настройки"));
-        Thread.sleep(3000);
-
-        tester.openEditMainProfileScreen();
-//        tester.logout();
+//        accountTester.logout();
+        accountTester.openEditMainProfileScreen();
         assertTrue(helper.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля"));
-        assertTrue(tester.editMainUsername(editMainUsername));
+        assertTrue(accountTester.editMainUsername(editMainUsername));
     }
 
     @AfterClass

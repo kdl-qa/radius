@@ -1,6 +1,6 @@
 package com.radius.func;
 
-import com.radius.data.Settings;
+import com.radius.data.Account;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,23 +21,27 @@ public class UserSettings {
     }
 
     public void logout() {
-        Settings.logoutBtn.click();
+        Account.logoutBtn.click();
     }
 
-    public boolean openEditMainProfileScreen() {
-        wait.until(ExpectedConditions.visibilityOf(Settings.myMainAvatar));
-        if (Settings.myMainName.isEnabled()) {
-            Settings.mainProfileEditBtn.click();
+    public void openEditMainProfileScreen() throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOf(Account.myMainAvatar));
+//       SettingsData.logoutBtn.click();
+        if (Account.myMainName.isEnabled()) {
+            System.out.println("user settings enabled");
+            Account.mainProfileEditBtn.click();
+        }else{
+            System.out.println("user settings disabled");
         }
-        return true;
+//        return true;
     }
 
     public boolean editMainUsername(String updateUsername) {
-//        wait.until(ExpectedConditions.visibilityOf(Settings.edit_usernameInput));
-        if (Settings.edit_usernameInput.isEnabled()) {
-            Settings.edit_usernameInput.clear();
-            Settings.edit_usernameInput.sendKeys(updateUsername);
-            Settings.update_profileBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(Account.edit_usernameInput));
+        if (Account.edit_usernameInput.isEnabled()) {
+            Account.edit_usernameInput.clear();
+            Account.edit_usernameInput.sendKeys(updateUsername);
+            Account.update_profileBtn.click();
         }
         return true;
     }

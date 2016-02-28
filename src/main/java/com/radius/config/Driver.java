@@ -1,5 +1,6 @@
 package com.radius.config;
 
+import com.radius.data.Account;
 import com.radius.data.Chats;
 import com.radius.data.Contacts;
 import io.appium.java_client.android.AndroidDriver;
@@ -27,9 +28,11 @@ public class Driver {
             driver = new SwipeableDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 //  driver = new SwipeableDriver(new URL("http://10.0.1.69:4745/wd/hub"), capabilities);
 
+            PageFactory.initElements(driver, Account.class);
             PageFactory.initElements(driver, Chats.class); //path to locator class???
             PageFactory.initElements(driver, Contacts.class);
             PageFactory.initElements(driver, Helpers.class);
+
 //
         } catch (Exception e) {
             System.out.println(e.getMessage());
