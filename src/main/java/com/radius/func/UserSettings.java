@@ -1,6 +1,6 @@
 package com.radius.func;
 
-import com.radius.data.Account;
+import com.radius.data.Accounts;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,30 +21,36 @@ public class UserSettings {
     }
 
     public void logout() {
-        Account.logoutBtn.click();
+        Accounts.logoutBtn.click();
     }
 
     public void openEditMainProfileScreen() throws InterruptedException {
-        wait.until(ExpectedConditions.visibilityOf(Account.myMainAvatar));
+        wait.until(ExpectedConditions.visibilityOf(Accounts.myMainAvatar));
 //       SettingsData.logoutBtn.click();
-        if (Account.myMainName.isEnabled()) {
-            System.out.println("user settings enabled");
-            Account.mainProfileEditBtn.click();
-        }else{
+        if (Accounts.myMainName.isEnabled()) {
+            Accounts.mainProfileEditBtn.click();
+        } else {
             System.out.println("user settings disabled");
         }
 //        return true;
     }
 
     public boolean editMainUsername(String updateUsername) {
-        wait.until(ExpectedConditions.visibilityOf(Account.edit_usernameInput));
-        if (Account.edit_usernameInput.isEnabled()) {
-            Account.edit_usernameInput.clear();
-            Account.edit_usernameInput.sendKeys(updateUsername);
-            Account.update_profileBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(Accounts.edit_usernameInput));
+        if (Accounts.edit_usernameInput.isEnabled()) {
+            Accounts.edit_usernameInput.clear();
+            Accounts.edit_usernameInput.sendKeys(updateUsername);
+            Accounts.update_profileBtn.click();
         }
         return true;
     }
 
+    public boolean checkEditedAccountMainUsername(String username) {
+        wait.until(ExpectedConditions.visibilityOf(Accounts.myMainName));
+        if (Accounts.myMainName.getText().equalsIgnoreCase(username)) {
+            System.out.println("Username is changed!");
+        }
+        return true;
+    }
 
 }

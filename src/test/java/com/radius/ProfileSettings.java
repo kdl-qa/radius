@@ -24,7 +24,7 @@ public class ProfileSettings {
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
     Helpers helper;
-    UserSettings accountTester;
+    UserSettings tester;
 
     @BeforeClass
     public void settings() {
@@ -32,7 +32,7 @@ public class ProfileSettings {
         wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
         helper = new Helpers(driver, wait, touchScreen);
-        accountTester = new UserSettings(driver, wait, touchScreen);
+        tester = new UserSettings(driver, wait, touchScreen);
     }
 
 
@@ -40,11 +40,14 @@ public class ProfileSettings {
     @Test(groups = {"editMainUsername"}, dataProviderClass = UserDataProvider.class, dataProvider = "getEditMainName")
     public void editMainUsername(String editMainUsername) throws InterruptedException {
         assertTrue(helper.openMenuItem(SETTINGS));
-        assertTrue(helper.checkScreenTitle(SETTINGS_SCREEN, "Настройки"));
-//        accountTester.logout();
-        accountTester.openEditMainProfileScreen();
-        assertTrue(helper.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля"));
-        assertTrue(accountTester.editMainUsername(editMainUsername));
+        helper.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
+//        tester.logout();
+        tester.openEditMainProfileScreen();
+        helper.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля");
+        assertTrue(tester.editMainUsername(editMainUsername));
+        helper.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
+        assertTrue(tester.checkEditedAccountMainUsername(editMainUsername));
+
     }
 
     @AfterClass

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Dialog" verbose="2">
+
+
+    <test name="test ProfileSettings.class">
+        <classes>
+            <class name="com.radius.ProfileSettings">
+                <methods>
+                    <include name="editMainUsername"/>
+                    <!--<include name="createChatFromDialogTab"/>-->
+                    <!--<include name="createChatFromGroupTab"/>-->
+                    <!--<include name="createDialogFromGroupChat"/>-->
+                    <!--<include name="createChatFromContactList" />-->
+                    <!--<include name="checkContactsChatStructure"/>-->
+                    <!--<include name=""/>-->
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
+

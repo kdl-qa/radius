@@ -43,6 +43,12 @@ public class Chats {
     @FindBy(className = "android.widget.TextView")
     public static WebElement s_text;
 
+    @FindBy(xpath = "//android.widget.TextView[@index='1']")
+    public static WebElement navTitle;
+
+    @FindBy(xpath = "//android.widget.LinearLayout[@index='1']/android.widget.TextView[@index='0']")
+    public static WebElement chatTitle1;
+
     @FindBy(id = "fab_contacts")
     public static WebElement createChatBtn;
 
@@ -102,6 +108,9 @@ public class Chats {
 
     @FindBy(id = "user_name")
     public static List<WebElement> chatUsernames;
+
+    @FindBy(id = "user_name")
+    public static WebElement chat_user_name;
 
     @FindBy(id = "image_view_avatar")
     public static List<WebElement> chatAvatars;

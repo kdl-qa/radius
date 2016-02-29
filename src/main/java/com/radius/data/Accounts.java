@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by kdl on 28.02.16.
  */
-public class Account {
+public class Accounts {
     /*===================== Common =====================*/
 
     //todo: xpath Main and public blocks (class = android.widget.TextView)

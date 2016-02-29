@@ -171,25 +171,19 @@ public class Helpers {
         switch (screenTitle) {
             case CHATS_SCREEN:
                 wait.until(ExpectedConditions.visibilityOf(Chats.chatsScreenTitle));
-                return Chats.chatsScreenTitle.getText().equals(expectedScreenTitle);
+                return Chats.navTitle.getText().equals(expectedScreenTitle);
+            case VENUE_SCREEN:
             case DIALOG_SCREEN:
             case GROUP_SCREEN:
-//                wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(Chats.chat_title)));
                 wait.until(ExpectedConditions.visibilityOf(Chats.chatTitle));
                 return Chats.chatTitle.getText().equals(expectedScreenTitle);
-            case VENUE_SCREEN:
-                return true;
             case CREATE_CHAT_SCREEN:
-                wait.until(ExpectedConditions.visibilityOf(Chats.actionBar));
-                return Chats.s_text.getText().equals(expectedScreenTitle);
             case CONTACTS_SCREEN:
             case CONTACT_PROFILE_SCREEN:
-                wait.until(ExpectedConditions.visibilityOf(Chats.actionBar));
-                return Chats.s_text.getText().equals(expectedScreenTitle);
             case SETTINGS_SCREEN:
             case EDIT_PROFILE_SCREEN:
                 wait.until(ExpectedConditions.visibilityOf(Chats.actionBar));
-                return Chats.s_text.getText().equals(expectedScreenTitle);
+                return Chats.navTitle.getText().equals(expectedScreenTitle);
             default:
                 return false;
         }
@@ -234,6 +228,6 @@ public class Helpers {
     }
 
     public void logout() {
-        Account.logoutBtn.click();
+        Accounts.logoutBtn.click();
     }
 }

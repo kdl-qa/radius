@@ -94,8 +94,6 @@ public class Dialog {
     @Test (groups = {"createDialogFromMainUserProfile"}, dataProviderClass = ContactsDataProvider.class, dataProvider = "getMainContact2")
     public void createChatFromContactList(String mainContact2) throws InterruptedException {
         assertTrue(helper.openMenuItem(CONTACTS));
-//        chatsTester.tapMenuIcon();
-//        helper.openMenuItemByText("Контакты");
         assertTrue(helper.checkScreenTitle(CONTACTS_SCREEN, "Контакты"));
         chatsTester.openUserProfileFromContactList(mainContact2);
         assertTrue(helper.checkScreenTitle(CONTACT_PROFILE_SCREEN, mainContact2));

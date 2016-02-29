@@ -163,7 +163,6 @@ public class DialogAndChats {
             if (!Chats.list.isEmpty()) {
                 Chats.list.get(album).click();
                 for (int i = 0; i < count; ++i) {
-                    System.out.println(i);
                     Chats.list.get(i).click();
                 }
                 Chats.gallerySubmit.click();
@@ -203,12 +202,18 @@ public class DialogAndChats {
 
     /*======================= Groups ==========================*/
 
-    public boolean openChatDialogByUsername(String username){
-        for (WebElement user : Chats.chatUsernames)
-            if (user.getText().equalsIgnoreCase(username)){
-                user.click();
-                break;
-            } else continue;
+    public boolean openChatDialogByUsername(String username) {
+        if (Chats.chat_user_name.isEnabled()) {
+            for (WebElement user : Chats.chatUsernames)
+                if (user.getText().equalsIgnoreCase(username)) {
+                    user.click();
+                    System.out.println("click");
+                    break;
+                } else {
+                    touchScreen.flick(Chats.sideBar, 0, 200, 80).perform();
+                    System.out.println("else");
+                }
+        }
         return true;
     }
 
