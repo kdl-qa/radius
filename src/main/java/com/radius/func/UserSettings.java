@@ -1,6 +1,7 @@
 package com.radius.func;
 
 import com.radius.data.Accounts;
+import com.radius.data.Chats;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,15 +25,13 @@ public class UserSettings {
         Accounts.logoutBtn.click();
     }
 
-    public void openEditMainProfileScreen() throws InterruptedException {
+    public void openEditMainProfileScreen() {
         wait.until(ExpectedConditions.visibilityOf(Accounts.myMainAvatar));
-//       SettingsData.logoutBtn.click();
         if (Accounts.myMainName.isEnabled()) {
             Accounts.mainProfileEditBtn.click();
         } else {
             System.out.println("user settings disabled");
         }
-//        return true;
     }
 
     public boolean editMainUsername(String updateUsername) {
@@ -53,4 +52,32 @@ public class UserSettings {
         return true;
     }
 
+    public boolean deleteProfileAvatar() {
+        wait.until(ExpectedConditions.visibilityOf(Accounts.avatar_deleteBtn));
+        if (Accounts.avatar_deleteBtn.isEnabled()) {
+            Accounts.avatar_deleteBtn.click();
+            Accounts.update_profileBtn.click();
+        }
+        return true;
+    }
+
+    public boolean chooseAvatarFromGallery(int album, int imgIndex) {
+        if (!Chats.list.isEmpty()) {
+            Chats.list.get(album).click();
+            Chats.list.get(imgIndex).click();
+            Chats.gallerySubmit.click();
+            Accounts.submitAvatarAction.click();
+        }
+        return true;
+    }
+
+    public boolean addProfileAvatar(int album, int img_index) {
+        wait.until(ExpectedConditions.visibilityOf(Accounts.avatar_imageBtn));
+        if (!Accounts.avatar_deleteBtn.isEnabled()) {
+            Accounts.avatar_imageBtn.click();
+            chooseAvatarFromGallery(album, img_index);
+            Accounts.update_profileBtn.click();
+        }
+        return true;
+    }
 }

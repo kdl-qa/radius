@@ -54,4 +54,9 @@ public class Accounts {
     @FindBy(id = "profile_update_fab")
     public static WebElement update_profileBtn;
 
+    /*======================== Image & Gallery =========================*/
+
+    @FindBy(id = "action_back_to_list")
+    public static WebElement submitAvatarAction;
+
 }

@@ -27,7 +27,7 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${basedir}/src/test/assets/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${basedir}/src/test/assets/testng1.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
                 <dependencies>

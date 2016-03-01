@@ -7,7 +7,7 @@
             <class name="com.radius.ProfileSettings">
                 <methods>
                     <include name="editMainUsername"/>
-                    <!--<include name="createChatFromDialogTab"/>-->
+                    <include name="deleteMainAvatar"/>
                     <!--<include name="createChatFromGroupTab"/>-->
                     <!--<include name="createDialogFromGroupChat"/>-->
                     <!--<include name="createChatFromContactList" />-->
