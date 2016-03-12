@@ -2,10 +2,7 @@ package com.radius.pages;
 
 import com.radius.helpers.MenuItems;
 import com.radius.helpers.ScreenTitles;
-import com.radius.helpers.Tabs;
-import com.radius.pages.Contacts;
-import com.radius.pages.DialogAndChats;
-import com.radius.pages.UserSettings;
+import com.radius.helpers.AppTabs;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -26,13 +23,70 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
  */
 public class MobilePage {
 
-    /*===========================Side Bar==========================*/
+    /*===================================== Locators ===================================================*/
+
+    /*------------------------------------ Navigation -------------------------------------------*/
+//
+//    @FindBy(name = "Чаты")
+//    public static WebElement chatsScreenTitle;
+
+    //todo => tab by class or id (for search by index)
+    @FindBy(className = "android.support.v7.app.ActionBar$Tab")
+    public static List<WebElement> actionTabs;
+
+    @FindBy(id = "toolbar")
+    public static WebElement actionBar;
+
+//
+//    @FindBy(id = "username_toolbar")
+//    public static WebElement chatTitle;
+
+    @FindBy(id = "text_area")
+    public static WebElement actionTabText;
+
+    @FindBy(id = "tab_avatar")
+    public static WebElement contactsTabAvatar;
+
+    @FindBy(className = "android.widget.TextView")
+    public static WebElement s_text;
+
+    @FindBy(xpath = "//android.widget.TextView[@index='1']")
+    public static WebElement navTitle;
+
+//    @FindBy(xpath = "//android.widget.LinearLayout[@index='1']/android.widget.TextView[@index='0']")
+//    public static WebElement chatTitle1;
+
+//    @FindBy(id = "fab_contacts")
+//    public static WebElement createChatBtn;
+
+    @FindBy(className = "android.widget.ImageButton")
+    public static WebElement menuIcon, backBtn;
+
+//    @FindBy(id = "list_chats")
+//    public static WebElement chatsListView;
+
+    @FindBy(id = "text_view_chat_name")
+    public static List<WebElement> chatItemName;
+
+
+    /*-------------------------------------- Side Bar ----------------------------------------*/
     @FindBy(id = "design_navigation_view")
     public static WebElement sideBar;
 
     //    @FindBy(id = "design_menu_item_text")
     @FindBy(className = "android.widget.CheckedTextView")
     public static List<WebElement> sideBarMenuItems;
+
+    @FindBy(id = "list_contacts")
+    public static WebElement contactList;
+
+
+
+    @FindBy(id = "text_view_contact_name")
+    public static List<WebElement> contactsName;
+
+
+    /*===================================== Methods ===================================================*/
 
     /**
      * Define AndroidDriver
@@ -109,47 +163,47 @@ public class MobilePage {
     }
 
     public boolean openMenuItem(MenuItems menu_item) {
-        DialogAndChats.menuIcon.click();
+        menuIcon.click();
         switch (menu_item) {
             case CHATS:
                 wait.until(ExpectedConditions.visibilityOf(sideBarMenuItems.get(0)));
                 sideBarMenuItems.get(0).click();
-                return DialogAndChats.s_text.getText().equalsIgnoreCase("Чаты");
+                return s_text.getText().equalsIgnoreCase("Чаты");
             case VENUES:
                 sideBarMenuItems.get(1).click();
-//                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.actionTabs.get(1)));
-                return DialogAndChats.s_text.getText().equalsIgnoreCase("Места");
+//                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.actionTabs.get(1)));
+                return s_text.getText().equalsIgnoreCase("Места");
             case CONTACTS:
                 sideBarMenuItems.get(2).click();
-//                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.actionTabs.get(2)));
-                return DialogAndChats.s_text.getText().equalsIgnoreCase("Контакты");
+//                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.actionTabs.get(2)));
+                return s_text.getText().equalsIgnoreCase("Контакты");
             case SETTINGS:
                 sideBarMenuItems.get(3).click();
-                return DialogAndChats.s_text.getText().equalsIgnoreCase("Настройки");
+                return s_text.getText().equalsIgnoreCase("Настройки");
             case ABOUT_APP:
                 sideBarMenuItems.get(4).click();
-                return DialogAndChats.s_text.getText().equalsIgnoreCase("Информация о приложении");
+                return s_text.getText().equalsIgnoreCase("Информация о приложении");
             default:
                 return false;
         }
     }
 
-    public boolean openActionTab(Tabs expectedTab) {
+    public boolean openActionTab(AppTabs expectedTab) {
         switch (expectedTab) {
             case MAIN_CONTACTS_TAB:
             case DIALOG_TAB:
-                DialogAndChats.actionTabs.get(0).click();
-                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.actionTabs.get(0)));
-                return DialogAndChats.actionTabs.get(0).isSelected();
+                actionTabs.get(0).click();
+                wait.until(ExpectedConditions.visibilityOf(actionTabs.get(0)));
+                return actionTabs.get(0).isSelected();
             case PUBLIC_CONTACTS_TAB:
             case GROUP_TAB:
-                DialogAndChats.actionTabs.get(1).click();
-                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.actionTabs.get(1)));
-                return DialogAndChats.actionTabs.get(1).isSelected();
+                actionTabs.get(1).click();
+                wait.until(ExpectedConditions.visibilityOf(actionTabs.get(1)));
+                return actionTabs.get(1).isSelected();
             case VENUES_TAB:
-                DialogAndChats.actionTabs.get(2).click();
-                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.actionTabs.get(2)));
-                return DialogAndChats.actionTabs.get(2).isSelected();
+                actionTabs.get(2).click();
+                wait.until(ExpectedConditions.visibilityOf(actionTabs.get(2)));
+                return actionTabs.get(2).isSelected();
             default:
                 return false;
         }
@@ -158,36 +212,38 @@ public class MobilePage {
 
 
     public boolean createChat() {
-        wait.until(ExpectedConditions.visibilityOf(DialogAndChats.createChatBtn));
-        DialogAndChats.createChatBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.createChatBtn));
+        DialogAndGroupPage.createChatBtn.click();
         return true;
     }
 
     public boolean submitCreateChat() {
-        if (DialogAndChats.contactMarked.isDisplayed()) {
-            DialogAndChats.submitCrtBtn.click();
+        if (ContactsPage.contactMarked.isDisplayed()) {
+            DialogAndGroupPage.submitCrtBtn.click();
         }
         return true;
     }
 
     public boolean checkChatPresence(String chatName) {
-        for (WebElement contact : DialogAndChats.dialogName)
+        for (WebElement contact : DialogAndGroupPage.chatItemName)
             if (contact.getText().equalsIgnoreCase(chatName)) {
                 break;
             } else System.out.println("Chat has another name!");
         return true;
     }
 
-    public boolean checkContactPresence(String contactName) {
-        for (WebElement contact : Contacts.contactsName)
-            if (contact.getText().equalsIgnoreCase(contactName)) return true;
+    public boolean checkContactPresence(String contacter) {
+        for (WebElement contact : /*ContactsPage.*/contactsName)
+            if (contact.getText().equalsIgnoreCase(contacter)) {
+                return true;
+            }
         return false;
     }
 
 
-    public boolean tapOnContact(String contactName) {
-        for (WebElement contact : Contacts.contactsName)
-            if (contact.getText().equalsIgnoreCase(contactName)) {
+    public boolean tapOnContact(String contacter) {
+        for (WebElement contact : /*ContactsPage.*/contactsName)
+            if (contact.getText().equalsIgnoreCase(contacter)) {
                 contact.click();
                 break;
             }
@@ -197,46 +253,46 @@ public class MobilePage {
     public boolean checkScreenTitle(ScreenTitles screenTitle, String expectedScreenTitle) {
         switch (screenTitle) {
             case CHATS_SCREEN:
-                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.chatsScreenTitle));
-                return DialogAndChats.navTitle.getText().equals(expectedScreenTitle);
+                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.chatsScreenTitle));
+                return MobilePage.navTitle.getText().equals(expectedScreenTitle);
             case VENUE_SCREEN:
             case DIALOG_SCREEN:
             case GROUP_SCREEN:
-                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.chatTitle));
-                return DialogAndChats.chatTitle.getText().equals(expectedScreenTitle);
+                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.chatTitle));
+                return DialogAndGroupPage.chatTitle.getText().equals(expectedScreenTitle);
             case CREATE_CHAT_SCREEN:
             case CONTACTS_SCREEN:
             case CONTACT_PROFILE_SCREEN:
             case SETTINGS_SCREEN:
             case EDIT_PROFILE_SCREEN:
-                wait.until(ExpectedConditions.visibilityOf(DialogAndChats.actionBar));
-                return DialogAndChats.navTitle.getText().equals(expectedScreenTitle);
+                wait.until(ExpectedConditions.visibilityOf(actionBar));
+                return navTitle.getText().equals(expectedScreenTitle);
             default:
                 return false;
         }
     }
 
     public boolean goBack() {
-        if (DialogAndChats.actionBar.isDisplayed()) {
-            DialogAndChats.backBtn.click();
+        if (actionBar.isDisplayed()) {
+            backBtn.click();
             return true;
         } else return false;
     }
 
     public boolean checkContactListTabs(String tab_name) {
-        wait.until(ExpectedConditions.visibilityOf(DialogAndChats.contactListTab));
+        wait.until(ExpectedConditions.visibilityOf(actionTabText));
         switch (tab_name) {
             case "main_profile":
-                if (DialogAndChats.contactList.isEnabled() & DialogAndChats.actionTabs.get(0).isSelected()) {
-                    return DialogAndChats.submitCrtBtn.isDisplayed();
+                if (/*ContactsPage.*/contactList.isEnabled() & actionTabs.get(0).isSelected()) {
+                    return DialogAndGroupPage.submitCrtBtn.isDisplayed();
                 }
             case "public_profile":
-                if (DialogAndChats.contactList.isEnabled() & DialogAndChats.actionTabs.get(1).isSelected()) {
-                    return DialogAndChats.contactPublic_openChat.isDisplayed();
+                if (/*ContactsPage.*/contactList.isEnabled() & actionTabs.get(1).isSelected()) {
+                    return ContactsPage.contactPublic_openChat.isDisplayed() || ContactsPage.contactPublic_listEmpty.isDisplayed();
                 }
             case "no_public_profile":
-                if (DialogAndChats.publicUserEmpty.isEnabled() & DialogAndChats.actionTabs.get(1).isSelected()) {
-                    return DialogAndChats.createPublicProfileBtn.isDisplayed();
+                if (ContactsPage.publicUserEmpty.isEnabled() & actionTabs.get(1).isSelected()) {
+                    return ContactsPage.createPublicProfileBtn.isDisplayed();
                 }
             default:
                 return false;
@@ -244,13 +300,13 @@ public class MobilePage {
     }
 
     public boolean activateContactListTab(int index) {
-        wait.until(ExpectedConditions.visibilityOf(DialogAndChats.contactListTab));
+        wait.until(ExpectedConditions.visibilityOf(actionTabText));
         switch (index) {
             case 0:
-                DialogAndChats.actionTabs.get(0).click();
+                actionTabs.get(0).click();
                 break;
             case 1:
-                DialogAndChats.actionTabs.get(1).click();
+                actionTabs.get(1).click();
                 break;
             default:
                 return false;
@@ -259,7 +315,7 @@ public class MobilePage {
     }
 
     public void logout() {
-        UserSettings.logoutBtn.click();
+        UserSettingsPage.logoutBtn.click();
     }
 
 }

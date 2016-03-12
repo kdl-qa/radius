@@ -1,9 +1,9 @@
 package com.radius;
 
-import com.radius.config.Driver;
-import com.radius.config.Helpers;
-import com.radius.data.ContactsDataProvider;
-import com.radius.func.DialogAndChats;
+import com.radius.drivers.Driver;
+import com.radius.pages.MobilePage;
+import com.radius.data_providers.ContactsDataProvider;
+import com.radius.pages.DialogAndGroupPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,9 +13,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Description;
 
-import static com.radius.data.MenuItems.*;
-import static com.radius.data.ScreenTitles.*;
-import static com.radius.data.Tabs.*;
+import static com.radius.helpers.MenuItems.CHATS;
+import static com.radius.helpers.ScreenTitles.DIALOG_SCREEN;
+import static com.radius.helpers.AppTabs.DIALOG_TAB;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -25,51 +25,62 @@ public class Messaging {
     public static AndroidDriver driver;
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
-    DialogAndChats chatsTester;
-    Helpers helper;
+    DialogAndGroupPage chatsTester;
+    MobilePage mobileTester;
+//    Helpers helper;
 
     @BeforeClass
     public void messaging() {
         driver = Driver.initDriver();
         wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
-        chatsTester = new DialogAndChats(driver, wait, touchScreen);
-        helper = new Helpers(driver, wait,touchScreen);
+        chatsTester = new DialogAndGroupPage(driver, wait, touchScreen);
+        mobileTester = new MobilePage(driver, wait, touchScreen);
+//        helper = new Helpers(driver, wait,touchScreen);
     }
 
-    @Description("Send in dialog Geo message")
+    @Description("Send to dialog Geo message")
     @Test (groups = {"chatDialogSendGeoMessage"}, dataProviderClass = ContactsDataProvider.class, dataProvider = "getMainContact1")
-    public void dialogSendGeoMsg(String username) throws InterruptedException {
-        assertTrue(helper.openMenuItem(CHATS));
-        assertTrue(helper.openActionTab(DIALOG_TAB));
-        assertTrue(chatsTester.openDialogByName(username));
-        assertTrue(helper.checkScreenTitle(DIALOG_SCREEN, username));
-        chatsTester.sendDialogGeo();
+    public void dialogSendGeoMsg(String username) {
+        mobileTester.openMenuItem(CHATS);
+        mobileTester.openActionTab(DIALOG_TAB);
+        chatsTester.openDialogByName(username);
+        mobileTester.checkScreenTitle(DIALOG_SCREEN, username);
+        assertTrue(chatsTester.sendDialogGeo());
     }
 
-    @Description("Send in dialog Image messages")
+    @Description("Send to dialog Image messages")
     @Test (groups = {"chatDialogSendImageMessage"},  dataProviderClass = ContactsDataProvider.class, dataProvider = "getMainContact1")
-    public void dialogSendImageMsg(String username) throws InterruptedException {
-        assertTrue(helper.openMenuItem(CHATS));
-        assertTrue(helper.openActionTab(DIALOG_TAB));
+    public void dialogSendImageMsg(String username) {
+        mobileTester.openMenuItem(CHATS);
+        mobileTester.openActionTab(DIALOG_TAB);
 //        assertTrue(chatsTester.openChatByIndex(1));
-        assertTrue(chatsTester.openDialogByName(username));
-        assertTrue(chatsTester.sendDialogImage(3, 2));
+        chatsTester.openDialogByName(username);
+        assertTrue(chatsTester.sendDialogImage(3, 1));
+    }
+
+    @Description("Send to Dialog Text message")
+    @Test(groups = {"checkDialogSendTextMessage"}, dataProviderClass = ContactsDataProvider.class, dataProvider = "getMainContact1")
+    public void dialogSendTextMsg(String username) {
+        mobileTester.openMenuItem(CHATS);
+        mobileTester.openActionTab(DIALOG_TAB);
+        chatsTester.openDialogByName(username);
+        assertTrue(chatsTester.sendDialogMsg());
     }
 
     @Description("Check Dialog message sent status")
     @Test(groups = {"checkDialogMainMessageSentStatus"}, dataProviderClass = ContactsDataProvider.class, dataProvider = "getMainContact1")
     public void checkDialogSendMsgStatus(String username) throws InterruptedException {
-        assertTrue(helper.openMenuItem(CHATS));
-        assertTrue(helper.openActionTab(DIALOG_TAB));
-        assertTrue(chatsTester.openDialogByName(username));
+        mobileTester.openMenuItem(CHATS);
+        mobileTester.openActionTab(DIALOG_TAB);
+        chatsTester.openDialogByName(username);
         chatsTester.sendDialogMsg();
         assertTrue(chatsTester.checkSentMsgStatus());
     }
 
-    @AfterGroups(groups = {"chatDialogSendGeoMessage", "chatDialogSendImageMessage", "checkDialogMainMessageSentStatus"})
+    @AfterGroups(groups = {"chatDialogSendGeoMessage", "chatDialogSendImageMessage", "checkDialogSendTextMessage", "checkDialogMainMessageSentStatus"})
     public void navigateBack() {
-        helper.goBack();
+        mobileTester.goBack();
     }
 
     @AfterClass

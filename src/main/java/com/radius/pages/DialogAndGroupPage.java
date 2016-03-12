@@ -17,35 +17,30 @@ public class DialogAndGroupPage extends MobilePage {
 
     /*===================================== Locators ===================================================*/
 
-    /*====================== Dialog & Group =========================*/
-
-    /*============================ Navigation =============================*/
-
     @FindBy(name = "Чаты")
     public static WebElement chatsScreenTitle;
 
-    //todo => tab by class or id (for search by index)
-    @FindBy(className = "android.support.v7.app.ActionBar$Tab")
-    public static List<WebElement> actionTabs;
-
-    @FindBy(id = "toolbar")
-    public static WebElement actionBar;
+//    @FindBy(className = "android.support.v7.app.ActionBar$Tab")
+//    public static List<WebElement> actionTabs;
+//
+//    @FindBy(id = "toolbar")
+//    public static WebElement actionBar;
 
 
     @FindBy(id = "username_toolbar")
     public static WebElement chatTitle;
 
-    @FindBy(id = "text_area")
-    public static WebElement contactListTab;
+//    @FindBy(id = "text_area")
+//    public static WebElement actionTabText;
+//
+//    @FindBy(id = "tab_avatar")
+//    public static WebElement contactsTabAvatar;
+//
+//    @FindBy(className = "android.widget.TextView")
+//    public static WebElement s_text;
 
-    @FindBy(id = "tab_avatar")
-    public static WebElement contactsTabAvatar;
-
-    @FindBy(className = "android.widget.TextView")
-    public static WebElement s_text;
-
-    @FindBy(xpath = "//android.widget.TextView[@index='1']")
-    public static WebElement navTitle;
+//    @FindBy(xpath = "//android.widget.TextView[@index='1']")
+//    public static WebElement navTitle;
 
     @FindBy(xpath = "//android.widget.LinearLayout[@index='1']/android.widget.TextView[@index='0']")
     public static WebElement chatTitle1;
@@ -53,14 +48,14 @@ public class DialogAndGroupPage extends MobilePage {
     @FindBy(id = "fab_contacts")
     public static WebElement createChatBtn;
 
-    @FindBy(className = "android.widget.ImageButton")
-    public static WebElement menuIcon, backBtn;
+//    @FindBy(className = "android.widget.ImageButton")
+//    public static WebElement menuIcon, backBtn;
 
     @FindBy(id = "list_chats")
-    public static WebElement dialogListView;
+    public static WebElement chatsListView;
 
     @FindBy(id = "text_view_chat_name")
-    public static List<WebElement> dialogName;
+    public static List<WebElement> chatItemName;
 
     /*===========================Side Bar==========================*/
 //    @FindBy(id = "design_navigation_view")
@@ -134,33 +129,31 @@ public class DialogAndGroupPage extends MobilePage {
     @FindBy(id = "delete")
     public static WebElement previewDelImage;
 
-
-
-    //TODO: need shift to ContactsPage page
     /*===================================== ContactsPage ===================================================*/
 
-    public static final String marked_contact = "selected_indicator";
-
-    @FindBy(id = "selected_indicator")
-    public static WebElement contactMarked;
-
-    @FindBy(id = "list_contacts")
-    public static WebElement contactList;
-
-    @FindBy(id = "public_user_empty")
-    public static WebElement publicUserEmpty;
-
-    @FindBy(id = "root_view")
-    public static List<WebElement> contactItems;
-
-    @FindBy(id = "info_open_chat")
-    public static WebElement contactPublic_openChat;
-
-    @FindBy(id = "create_public_profile_button")
-    public static WebElement createPublicProfileBtn;
+//    public static final String marked_contact = "selected_indicator";
+//
+//    @FindBy(id = "selected_indicator")
+//    public static WebElement contactMarked;
+//
+//    @FindBy(id = "list_contacts")
+//    public static WebElement contactList;
+//
+//    @FindBy(id = "public_user_empty")
+//    public static WebElement publicUserEmpty;
+//
+//    @FindBy(id = "root_view")
+//    public static List<WebElement> contactItems;
+//
+//    @FindBy(id = "info_open_chat")
+//    public static WebElement contactPublic_openChat;
+//
+//    @FindBy(id = "create_public_profile_button")
+//    public static WebElement createPublicProfileBtn;
 
 
     /*===================================== Methods ===================================================*/
+
     /**
      * Constructor
      */
@@ -196,7 +189,7 @@ public class DialogAndGroupPage extends MobilePage {
 
     public boolean tapSideBarMenuText(String text) {
         tapMenuIcon();
-        if (sideBar.isDisplayed()){
+        if (sideBar.isDisplayed()) {
             for (WebElement item : sideBarMenuItems)
                 if (item.getText().equalsIgnoreCase(text)) {
                     item.click();
@@ -211,22 +204,22 @@ public class DialogAndGroupPage extends MobilePage {
 
     public boolean openChatByIndex(int index) {
 
-        wait.until(ExpectedConditions.visibilityOf(dialogListView));
+        wait.until(ExpectedConditions.visibilityOf(chatsListView));
         if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
-            if (dialogName.isEmpty()) {
+            if (chatItemName.isEmpty()) {
                 System.out.println("You don't have any chats");
-            } else dialogName.get(index).click();
+            } else chatItemName.get(index).click();
             return true;
         } else return false;
     }
 
     public boolean openDialogByName(String name) {
-        wait.until(ExpectedConditions.visibilityOf(dialogListView));
+        wait.until(ExpectedConditions.visibilityOf(chatsListView));
         if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
-            if (dialogName.isEmpty()) {
+            if (chatItemName.isEmpty()) {
                 System.out.println("You don't have any chats");
             } else {
-                for (WebElement dialog_name : dialogName) {
+                for (WebElement dialog_name : chatItemName) {
                     if (dialog_name.getText().equalsIgnoreCase(name)) {
                         dialog_name.click();
                         break;
@@ -316,14 +309,14 @@ public class DialogAndGroupPage extends MobilePage {
         if (submitCrtBtn.isEnabled()) {
             System.out.println("ContactsPage marked!");
             return false;
-            } else {
-                System.out.println("ContactsPage aren't marked! Submit button isn't enable!");
-            }
+        } else {
+            System.out.println("ContactsPage aren't marked! Submit button isn't enable!");
+        }
         return true;
     }
 
     public boolean openUserProfileFromContactList(String username) {
-        for (WebElement contact : ContactsPage.contactsName)
+        for (WebElement contact : ContactsPage.contactName)
             if (contact.getText().equalsIgnoreCase(username)) {
                 contact.click();
                 break;
