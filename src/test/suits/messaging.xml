@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Messaging" verbose="2">
+
+
+    <test name="test Messaging.class">
+        <classes>
+            <class name="com.radius.Messaging">
+                <methods>
+                    <include name="dialogSendGeoMsg"/>
+                    <include name="dialogSendImageMsg"/>
+                    <include name="dialogSendTextMsg"/>
+                    <include name="checkDialogSendMsgStatus"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
+

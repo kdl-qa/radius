@@ -1,4 +1,4 @@
-package com.radius.config;
+package com.radius.drivers;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.Capabilities;

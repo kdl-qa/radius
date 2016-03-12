@@ -1,4 +1,4 @@
-package com.radius.data;
+package com.radius.helpers;
 
 /**
  * Created by kdl on 25.02.16.

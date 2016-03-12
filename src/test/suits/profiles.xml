@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Profiles" verbose="2">
+
+
+    <test name="test ProfileSettings.class">
+        <classes>
+            <class name="com.radius.ProfileSettings">
+                <methods>
+                    <include name="dialogSendGeoMsg"/>
+                    <include name="dialogSendImageMsg"/>
+                    <include name="checkDialogSendMsgStatus"/>
+                    <include name=""/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
+

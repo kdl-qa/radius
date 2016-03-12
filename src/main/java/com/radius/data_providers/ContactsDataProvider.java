@@ -1,4 +1,4 @@
-package com.radius.data;
+package com.radius.data_providers;
 
 import org.testng.annotations.DataProvider;
 
@@ -24,7 +24,7 @@ public class ContactsDataProvider {
     @DataProvider
     public static Object[][] getMainContact2() {
         return new Object[][]{
-                {"сергей босовский"}
+                {"Alex Berlin Life"}
         };
     }
 }

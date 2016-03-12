@@ -1,8 +1,10 @@
-package com.radius.config;
+package com.radius.drivers;
 
-import com.radius.data.Accounts;
-import com.radius.data.Chats;
-import com.radius.data.Contacts;
+import com.radius.config.Helpers;
+import com.radius.config.SwipeableDriver;
+import com.radius.func.Contacts;
+import com.radius.func.DialogAndChats;
+import com.radius.func.UserSettings;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -21,15 +23,16 @@ public class Driver {
             capabilities.setCapability("deviceName", "Android");
             capabilities.setCapability("platformName", "Android");
             capabilities.setCapability("unicodeKeyboard", true);
-//        capabilities.setCapability("resetKeyboard", true);
-            capabilities.setCapability("appActivity", "ua.my.im.android.myua.screens.activities.LoginActivity");
+//            capabilities.setCapability("resetKeyboard", true);
             capabilities.setCapability("appPackage", "ua.my.im.android.myua");
+            capabilities.setCapability("appActivity", "ua.my.im.android.myua.screens.activities.LoginActivity");
+//            capabilities.setCapability("appActivity", "ua.my.im.android.myua.screens.activities.MainNavigatorActivity");
 
             driver = new SwipeableDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-//  driver = new SwipeableDriver(new URL("http://10.0.1.69:4745/wd/hub"), capabilities);
+//            driver = new SwipeableDriver(new URL("http://10.0.1.69:4745/wd/hub"), capabilities);
 
-            PageFactory.initElements(driver, Accounts.class);
-            PageFactory.initElements(driver, Chats.class); //path to locator class???
+            PageFactory.initElements(driver, UserSettings.class);
+            PageFactory.initElements(driver, DialogAndChats.class); //path to locator class???
             PageFactory.initElements(driver, Contacts.class);
             PageFactory.initElements(driver, Helpers.class);
 
