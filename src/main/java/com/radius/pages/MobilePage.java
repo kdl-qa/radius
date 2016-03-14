@@ -263,7 +263,7 @@ public class MobilePage {
      * Submit create chat
      */
     public boolean submitCreateChat() {
-        if (ContactsPage.contactMarked.isDisplayed()) {
+        if (Cnt.contactMarked.isDisplayed()) {
             DialogAndGroupPage.submitCrtBtn.click();
         }
         return true;
@@ -284,7 +284,7 @@ public class MobilePage {
      * Check contact presence
      */
     public boolean checkContactPresence(String contacter) {
-        for (WebElement contact : /*ContactsPage.*/contactsName)
+        for (WebElement contact : Cnt.contactsName)
             if (contact.getText().equalsIgnoreCase(contacter)) {
                 return true;
             }
@@ -296,7 +296,7 @@ public class MobilePage {
      * Choose contact from list
      */
     public boolean tapOnContact(String contacter) {
-        for (WebElement contact : /*ContactsPage.*/contactsName)
+        for (WebElement contact : Cnt.contactsName)
             if (contact.getText().equalsIgnoreCase(contacter)) {
                 contact.click();
                 break;
@@ -311,11 +311,13 @@ public class MobilePage {
         switch (screenTitle) {
             case CHATS_SCREEN:
                 wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.chatsScreenTitle));
+                System.out.println("chats screen");
                 return MobilePage.navTitle.getText().equals(expectedScreenTitle);
             case VENUE_SCREEN:
             case DIALOG_SCREEN:
             case GROUP_SCREEN:
                 wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.chatTitle));
+                System.out.println("dialog / group / venues screen");
                 return DialogAndGroupPage.chatTitle.getText().equals(expectedScreenTitle);
             case CREATE_CHAT_SCREEN:
             case CONTACTS_SCREEN:
@@ -323,6 +325,7 @@ public class MobilePage {
             case SETTINGS_SCREEN:
             case EDIT_PROFILE_SCREEN:
                 wait.until(ExpectedConditions.visibilityOf(actionBar));
+                System.out.println("create chat / contact / settings / edit");
                 return navTitle.getText().equals(expectedScreenTitle);
             default:
                 return false;
@@ -346,16 +349,16 @@ public class MobilePage {
         wait.until(ExpectedConditions.visibilityOf(actionTabText));
         switch (tab_name) {
             case "main_profile":
-                if (/*ContactsPage.*/contactList.isEnabled() & actionTabs.get(0).isSelected()) {
+                if (Cnt.contactList.isEnabled() & actionTabs.get(0).isSelected()) {
                     return DialogAndGroupPage.submitCrtBtn.isDisplayed();
                 }
             case "public_profile":
-                if (/*ContactsPage.*/contactList.isEnabled() & actionTabs.get(1).isSelected()) {
-                    return ContactsPage.contactPublic_openChat.isDisplayed() || ContactsPage.contactPublic_listEmpty.isDisplayed();
+                if (Cnt.contactList.isEnabled() & actionTabs.get(1).isSelected()) {
+                    return Cnt.contactPublic_openChat.isDisplayed() || Cnt.contactPublic_listEmpty.isDisplayed();
                 }
             case "no_public_profile":
-                if (ContactsPage.publicUserEmpty.isEnabled() & actionTabs.get(1).isSelected()) {
-                    return ContactsPage.createPublicProfileBtn.isDisplayed();
+                if (Cnt.publicUserEmpty.isEnabled() & actionTabs.get(1).isSelected()) {
+                    return Cnt.createPublicProfileBtn.isDisplayed();
                 }
             default:
                 return false;

@@ -29,7 +29,6 @@ public class Dialog {
     public static TouchActions touchScreen;
     DialogAndGroupPage chatsTester;
     MobilePage mobileTester;
-//    Helpers helper;
 
     @BeforeClass
     public void dialog() {
@@ -37,7 +36,6 @@ public class Dialog {
         wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
         chatsTester = new DialogAndGroupPage(driver, wait, touchScreen);
-//        helper = new Helpers(driver, wait, touchScreen);
         mobileTester = new MobilePage(driver, wait, touchScreen);
     }
 
@@ -104,7 +102,7 @@ public class Dialog {
         assertTrue(mobileTester.checkScreenTitle(DIALOG_SCREEN, mainContact1));
     }
 
-    @Description("Check the separation of ContactsPage by tabs")
+    @Description("Check the separation of Contacts by tabs")
     @Test (groups = {"checkContactsSeparation"})
     public void checkContactsChatStructure() {
         mobileTester.openMenuItem(CHATS);

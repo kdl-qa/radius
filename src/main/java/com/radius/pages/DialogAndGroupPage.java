@@ -18,11 +18,17 @@ public class DialogAndGroupPage extends MobilePage {
     /*===================================== Locators ===================================================*/
 
     /**
+     * user contact marked to chat
+     */
+    @FindBy(id = "selected_indicator")
+    public static WebElement contactMarked;
+
+    /**
      * chats screen title
      */
     //TODO: change to xpath
 //    @FindBy(name = "Чаты")
-    @FindBy(xpath = "//android.widget.LinearLayout/android.widget.TextView[@text='Чаты']")
+    @FindBy(xpath = "//android.view.View[@index='0']/android.widget.TextView[@text='Чаты']")
     public static WebElement chatsScreenTitle;
 
     /**
@@ -350,10 +356,10 @@ public class DialogAndGroupPage extends MobilePage {
      */
     public boolean checkDisableCreateChatBtn() {
         if (submitCrtBtn.isEnabled()) {
-            System.out.println("ContactsPage marked!");
+            System.out.println("Contacts marked!");
             return false;
         } else {
-            System.out.println("ContactsPage aren't marked! Submit button isn't enable!");
+            System.out.println("Contacts aren't marked! Submit button isn't enable!");
         }
         return true;
     }
@@ -363,7 +369,7 @@ public class DialogAndGroupPage extends MobilePage {
      */
     //todo: shift to contacts class
     public boolean openUserProfileFromContactList(String username) {
-        for (WebElement contact : ContactsPage.contactName)
+        for (WebElement contact : Contacts.contactName)
             if (contact.getText().equalsIgnoreCase(username)) {
                 contact.click();
                 break;
@@ -375,9 +381,9 @@ public class DialogAndGroupPage extends MobilePage {
      * Create chat from user profile
      */
     public void createChatFromUserProfile() {
-        wait.until(ExpectedConditions.visibilityOf(ContactsPage.contactUserProfileAvatar));
-        if (ContactsPage.contact_createChatBtn.isEnabled()) {
-            ContactsPage.contact_createChatBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(Contacts.contactUserProfileAvatar));
+        if (Contacts.contact_createChatBtn.isEnabled()) {
+            Contacts.contact_createChatBtn.click();
         }
     }
 

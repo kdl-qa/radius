@@ -3,12 +3,8 @@ package com.radius.drivers;
 //import com.radius.config.Helpers;
 
 import com.radius.helpers.AppActivities;
-import com.radius.pages.ContactsPage;
-import com.radius.pages.DialogAndGroupPage;
-import com.radius.pages.UserSettingsPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.PageFactory;
 
 import java.net.URL;
 
@@ -26,7 +22,7 @@ public class Driver {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
 //            capabilities.setCapability("deviceName", "192.168.56.101:5555");
-            capabilities.setCapability("deviceName", "Device");
+            capabilities.setCapability("deviceName", "Redmi");
             capabilities.setCapability("platformName", "Android");
             capabilities.setCapability("unicodeKeyboard", true);
             capabilities.setCapability("appPackage", AppActivities.STAGE_PACKAGE);
@@ -34,11 +30,11 @@ public class Driver {
 //            capabilities.setCapability("appActivity", AppActivities.STAGE_EMULATOR_ACTIVITY);
             driver = new SwipeableDriver(new URL(APPIUM_SERVER_URL), capabilities);
 
-            //TODO: Delete PageFactory in future refactoring
-            PageFactory.initElements(driver, UserSettingsPage.class);
-            PageFactory.initElements(driver, DialogAndGroupPage.class); //path to locator class???
-            PageFactory.initElements(driver, ContactsPage.class);
-//            PageFactory.initElements(driver, Helpers.class);
+//            //TODO: Delete PageFactory in future refactoring
+//            PageFactory.initElements(driver, UserSettingsPage.class);
+//            PageFactory.initElements(driver, DialogAndGroupPage.class); //path to locator class???
+//            PageFactory.initElements(driver, Contacts.class);
+////            PageFactory.initElements(driver, Helpers.class);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

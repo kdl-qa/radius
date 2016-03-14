@@ -10,11 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 /**
- * Created by kdl on 17.02.16.
+ * Created by kdl on 15.03.16.
  */
-public class ContactsPage extends MobilePage {
-
-    /*===================================== Locators ===================================================*/
+public class Cnt extends MobilePage{
+        /*===================================== Locators ===================================================*/
 
     /**
      * contacts list
@@ -76,12 +75,14 @@ public class ContactsPage extends MobilePage {
     @FindBy(id = "create_public_profile_button")
     public static WebElement createPublicProfileBtn;
 
-    /*==================================== Methods =====================================================*/
-
-    public ContactsPage(AndroidDriver driver, WebDriverWait wait, TouchActions touchScreen) {
+    public Cnt(AndroidDriver driver, WebDriverWait wait, TouchActions touchScreen) {
         super(driver, wait, touchScreen);
         PageFactory.initElements(driver, this);
     }
 
+
+
+
+    /*==================================== Methods =====================================================*/
 
 }

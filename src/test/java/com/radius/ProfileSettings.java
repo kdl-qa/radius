@@ -24,7 +24,6 @@ public class ProfileSettings {
     public static AndroidDriver driver;
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
-//    Helpers helper;
     UserSettingsPage tester;
     MobilePage mobileTester;
 
@@ -43,8 +42,6 @@ public class ProfileSettings {
     public void editMainUsername(String editMainUsername) throws InterruptedException {
 
         mobileTester.openMenuItem(SETTINGS);
-        mobileTester.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
-        assertTrue(mobileTester.openMenuItem(SETTINGS));
         mobileTester.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
         tester.openEditMainProfileScreen();
         mobileTester.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля");
