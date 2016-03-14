@@ -126,14 +126,14 @@ public class MobilePage {
                 c.click();
                 break;
             } else {
-                wait.until(presenceOfElementLocated(By.id("list")));
+                wait.until(presenceOfElementLocated(By.id("imagesList")));
                 touchScreen.flick(lastListElem, 0, -600, 80).perform();
             }
         }
     }
 
 
-    // check given list for element presence
+    // check given imagesList for element presence
     public static boolean checkElementPresence(List<WebElement> listOfElements, String elementToFind) {
         for (WebElement elem : listOfElements) {
             System.out.println(elem.getText());

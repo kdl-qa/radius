@@ -121,7 +121,7 @@ public class DialogAndGroupPage extends MobilePage {
     /*===================================== Attach List ===================================================*/
 
     @FindBy(id = "image")
-    public static List<WebElement> list;
+    public static List<WebElement> imagesList;
 
     @FindBy(id = "fab_done")
     public static WebElement gallerySubmit, previewSubmit, submitCrtBtn;
@@ -293,10 +293,10 @@ public class DialogAndGroupPage extends MobilePage {
         if (msgBox.isDisplayed()) {
             attachIcon.click();
             attachList.get(1).click();
-            if (!list.isEmpty()) {
-                list.get(album).click();
+            if (!imagesList.isEmpty()) {
+                imagesList.get(album).click();
                 for (int i = 0; i < count; ++i) {
-                    list.get(i).click();
+                    imagesList.get(i).click();
                 }
                 gallerySubmit.click();
                 previewSubmit.click();
