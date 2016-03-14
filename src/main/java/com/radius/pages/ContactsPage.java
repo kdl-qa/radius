@@ -16,42 +16,63 @@ public class ContactsPage extends MobilePage {
 
     /*===================================== Locators ===================================================*/
 
+    /**
+     * contacts list
+     */
     @FindBy(id = "root_view")
     public static List<WebElement> contactsList;
 
+    /**
+     * contact name
+     */
     @FindBy(id = "text_view_contact_name")
     public static List<WebElement> contactName;
 
+    /**
+     * user profile avatar
+     */
     @FindBy(id = "room_picture")
     public static WebElement contactUserProfileAvatar;
 
+    /**
+     * user profile start chat button
+     */
     @FindBy(id = "start_chat")
     public static WebElement contact_createChatBtn;
 
+    /**
+     * user profile block user button
+     */
     @FindBy(id = "block_user_button")
     public static WebElement contact_blockUserBtn;
 
-
-    public static final String marked_contact = "selected_indicator";
-
+    /**
+     * user contact marked to chat
+     */
     @FindBy(id = "selected_indicator")
     public static WebElement contactMarked;
 
-    @FindBy(id = "list_contacts")
-    public static WebElement contactList;
-
+    /**
+     * public user profile is empty label
+     */
     @FindBy(id = "public_user_empty")
     public static WebElement publicUserEmpty;
 
-    @FindBy(id = "root_view")
-    public static List<WebElement> contactItems;
-
+    /**
+     * public user profile open chat button
+     */
     @FindBy(id = "info_open_chat")
     public static WebElement contactPublic_openChat;
 
+    /**
+     * public profile empty contacts list
+     */
     @FindBy(id = "empty_view")
     public static WebElement contactPublic_listEmpty;
 
+    /**
+     * create public user profile button
+     */
     @FindBy(id = "create_public_profile_button")
     public static WebElement createPublicProfileBtn;
 

@@ -30,10 +30,16 @@ public class MobilePage {
 //    @FindBy(name = "Чаты")
 //    public static WebElement chatsScreenTitle;
 
+    /**
+     * action bar tabs
+     */
     //todo => tab by class or id (for search by index)
     @FindBy(className = "android.support.v7.app.ActionBar$Tab")
     public static List<WebElement> actionTabs;
 
+    /**
+     * action bar
+     */
     @FindBy(id = "toolbar")
     public static WebElement actionBar;
 
@@ -41,35 +47,47 @@ public class MobilePage {
 //    @FindBy(id = "username_toolbar")
 //    public static WebElement chatTitle;
 
+    /**
+     * action bar tabs name
+     */
     @FindBy(id = "text_area")
     public static WebElement actionTabText;
 
+    /**
+     * action bar contacts tab avatar
+     */
     @FindBy(id = "tab_avatar")
     public static WebElement contactsTabAvatar;
 
+    /**
+     * text by class TextView
+     */
     @FindBy(className = "android.widget.TextView")
     public static WebElement s_text;
 
+    /**
+     * navigation title text
+     */
     @FindBy(xpath = "//android.widget.TextView[@index='1']")
     public static WebElement navTitle;
 
-//    @FindBy(xpath = "//android.widget.LinearLayout[@index='1']/android.widget.TextView[@index='0']")
-//    public static WebElement chatTitle1;
-
-//    @FindBy(id = "fab_contacts")
-//    public static WebElement createChatBtn;
-
+    /**
+     * menu or back button on action bar
+     */
     @FindBy(className = "android.widget.ImageButton")
     public static WebElement menuIcon, backBtn;
 
-//    @FindBy(id = "list_chats")
-//    public static WebElement chatsListView;
-
+    /**
+     * chat name title
+     */
     @FindBy(id = "text_view_chat_name")
     public static List<WebElement> chatItemName;
 
 
     /*-------------------------------------- Side Bar ----------------------------------------*/
+    /**
+     * side bar view
+     */
     @FindBy(id = "design_navigation_view")
     public static WebElement sideBar;
 
@@ -77,11 +95,15 @@ public class MobilePage {
     @FindBy(className = "android.widget.CheckedTextView")
     public static List<WebElement> sideBarMenuItems;
 
+    /**
+     * contact list
+     */
     @FindBy(id = "list_contacts")
     public static WebElement contactList;
 
-
-
+    /**
+     * contact name
+     */
     @FindBy(id = "text_view_contact_name")
     public static List<WebElement> contactsName;
 
@@ -111,6 +133,9 @@ public class MobilePage {
         return driver;
     }
 
+    /**
+     * Generate random text
+     */
     public static String generateText(Random rng, String characters, int length) {
         char[] text = new char[length];
         for (int i = 0; i < length; i++) {
@@ -119,6 +144,9 @@ public class MobilePage {
         return new String(text);
     }
 
+    /**
+     * Find and click element from list
+     */
     public void findAndClickGivenElement(WebDriver driver, List<WebElement> listOfElements, WebElement lastListElem, WebDriverWait wait, TouchActions touchScreen, String elementToFind) {
         while (true) {
             if (checkElementPresence(listOfElements, elementToFind)) {
@@ -133,6 +161,9 @@ public class MobilePage {
     }
 
 
+    /**
+     * Check presence element in the list
+     */
     // check given imagesList for element presence
     public static boolean checkElementPresence(List<WebElement> listOfElements, String elementToFind) {
         for (WebElement elem : listOfElements) {
@@ -147,6 +178,9 @@ public class MobilePage {
         return false;
     }
 
+    /**
+     * Open menu item by text from SideBar
+     */
     public boolean openMenuItemByText(String text) {
         if (sideBar.isDisplayed()){
             for (WebElement item : sideBarMenuItems)
@@ -162,6 +196,9 @@ public class MobilePage {
         return true;
     }
 
+    /**
+     * Open menu item using CONSTANT
+     */
     public boolean openMenuItem(MenuItems menu_item) {
         menuIcon.click();
         switch (menu_item) {
@@ -188,6 +225,9 @@ public class MobilePage {
         }
     }
 
+    /**
+     * Open ActionTab by index
+     */
     public boolean openActionTab(AppTabs expectedTab) {
         switch (expectedTab) {
             case MAIN_CONTACTS_TAB:
@@ -210,13 +250,18 @@ public class MobilePage {
     }
 
 
-
+    /**
+     * Open contacts list (Chats) for chat
+     */
     public boolean createChat() {
         wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.createChatBtn));
         DialogAndGroupPage.createChatBtn.click();
         return true;
     }
 
+    /**
+     * Submit create chat
+     */
     public boolean submitCreateChat() {
         if (ContactsPage.contactMarked.isDisplayed()) {
             DialogAndGroupPage.submitCrtBtn.click();
@@ -224,6 +269,9 @@ public class MobilePage {
         return true;
     }
 
+    /**
+     * Check chat presence
+     */
     public boolean checkChatPresence(String chatName) {
         for (WebElement contact : DialogAndGroupPage.chatItemName)
             if (contact.getText().equalsIgnoreCase(chatName)) {
@@ -232,6 +280,9 @@ public class MobilePage {
         return true;
     }
 
+    /**
+     * Check contact presence
+     */
     public boolean checkContactPresence(String contacter) {
         for (WebElement contact : /*ContactsPage.*/contactsName)
             if (contact.getText().equalsIgnoreCase(contacter)) {
@@ -241,6 +292,9 @@ public class MobilePage {
     }
 
 
+    /**
+     * Choose contact from list
+     */
     public boolean tapOnContact(String contacter) {
         for (WebElement contact : /*ContactsPage.*/contactsName)
             if (contact.getText().equalsIgnoreCase(contacter)) {
@@ -250,6 +304,9 @@ public class MobilePage {
         return true;
     }
 
+    /**
+     * Check title of the screen presence
+     */
     public boolean checkScreenTitle(ScreenTitles screenTitle, String expectedScreenTitle) {
         switch (screenTitle) {
             case CHATS_SCREEN:
@@ -272,6 +329,9 @@ public class MobilePage {
         }
     }
 
+    /**
+     * Back to the previous screen
+     */
     public boolean goBack() {
         if (actionBar.isDisplayed()) {
             backBtn.click();
@@ -279,6 +339,9 @@ public class MobilePage {
         } else return false;
     }
 
+    /**
+     * Check contact tab presence
+     */
     public boolean checkContactListTabs(String tab_name) {
         wait.until(ExpectedConditions.visibilityOf(actionTabText));
         switch (tab_name) {
@@ -299,6 +362,9 @@ public class MobilePage {
         }
     }
 
+    /**
+     * Open contact tab
+     */
     public boolean activateContactListTab(int index) {
         wait.until(ExpectedConditions.visibilityOf(actionTabText));
         switch (index) {
@@ -314,6 +380,9 @@ public class MobilePage {
         return true;
     }
 
+    /**
+     * Logout messenger app
+     */
     public void logout() {
         UserSettingsPage.logoutBtn.click();
     }

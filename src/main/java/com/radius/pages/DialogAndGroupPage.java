@@ -17,53 +17,44 @@ public class DialogAndGroupPage extends MobilePage {
 
     /*===================================== Locators ===================================================*/
 
-    @FindBy(name = "Чаты")
+    /**
+     * chats screen title
+     */
+    //TODO: change to xpath
+//    @FindBy(name = "Чаты")
+    @FindBy(xpath = "//android.widget.LinearLayout/android.widget.TextView[@text='Чаты']")
     public static WebElement chatsScreenTitle;
 
-//    @FindBy(className = "android.support.v7.app.ActionBar$Tab")
-//    public static List<WebElement> actionTabs;
-//
-//    @FindBy(id = "toolbar")
-//    public static WebElement actionBar;
-
-
+    /**
+     * chat title
+     */
     @FindBy(id = "username_toolbar")
     public static WebElement chatTitle;
 
-//    @FindBy(id = "text_area")
-//    public static WebElement actionTabText;
-//
-//    @FindBy(id = "tab_avatar")
-//    public static WebElement contactsTabAvatar;
-//
-//    @FindBy(className = "android.widget.TextView")
-//    public static WebElement s_text;
-
-//    @FindBy(xpath = "//android.widget.TextView[@index='1']")
-//    public static WebElement navTitle;
-
+    /**
+     * chat title xpath
+     */
     @FindBy(xpath = "//android.widget.LinearLayout[@index='1']/android.widget.TextView[@index='0']")
     public static WebElement chatTitle1;
 
+    /**
+     * create chat button
+     */
     @FindBy(id = "fab_contacts")
     public static WebElement createChatBtn;
 
-//    @FindBy(className = "android.widget.ImageButton")
-//    public static WebElement menuIcon, backBtn;
-
+    /**
+     * chat list view
+     */
     @FindBy(id = "list_chats")
     public static WebElement chatsListView;
 
+    /**
+     * chat item name
+     */
     @FindBy(id = "text_view_chat_name")
     public static List<WebElement> chatItemName;
 
-    /*===========================Side Bar==========================*/
-//    @FindBy(id = "design_navigation_view")
-//    public static WebElement sideBar;
-//
-//    //    @FindBy(id = "design_menu_item_text")
-//    @FindBy(className = "android.widget.CheckedTextView")
-//    public static List<WebElement> sideBarMenuItems;
 
     /*===================================== Message Box ===================================================*/
 
@@ -73,21 +64,39 @@ public class DialogAndGroupPage extends MobilePage {
     public static final String msgStatus1 = "Прочитано";
     public static final String msgStatus2 = "Не доставлено";
 
+    /**
+     * chat message box
+     */
     @FindBy(id = "send_message_box")
     public static WebElement msgBox;
 
+    /**
+     * message input field
+     */
     @FindBy(id = "edit_text_send_message")
     public static WebElement msgTextField;
 
+    /**
+     * geo location mark
+     */
     @FindBy(id = "send_location_checkbox")
     public static WebElement locationIcon;
 
+    /**
+     * attach button
+     */
     @FindBy(id = "attach_something")
     public static WebElement attachIcon;
 
+    /**
+     * send message button
+     */
     @FindBy(id = "button_send")
     public static WebElement sendBtn;
 
+    /**
+     * attach items list
+     */
     @FindBy(className = "android.widget.LinearLayout")
     public static List<WebElement> attachList;
 
@@ -96,18 +105,33 @@ public class DialogAndGroupPage extends MobilePage {
     @FindBy(id = "layout")
     public static List<WebElement> msgsLayout;
 
+    /**
+     * bubble message
+     */
     @FindBy(id = "bubble")
     public static List<WebElement> bubbleMsgs;
 
+    /**
+     * bubble message text
+     */
     @FindBy(id = "text_view_message")
     public static List<WebElement> bubbleMsgsText;
 
+    /**
+     * bubble message date
+     */
     @FindBy(id = "text_view_date")
     public static List<WebElement> bubbleMsgsTime;
 
+    /**
+     * bubble message status
+     */
     @FindBy(id = "text_view_status")
     public static WebElement msgStatus;
 
+    /**
+     * bubble message text
+     */
     @FindBy(id = "user_name")
     public static List<WebElement> chatUsernames;
 
@@ -120,36 +144,23 @@ public class DialogAndGroupPage extends MobilePage {
 
     /*===================================== Attach List ===================================================*/
 
+    /**
+     * album or image
+     */
     @FindBy(id = "image")
     public static List<WebElement> imagesList;
 
+    /**
+     * gallery submit button
+     */
     @FindBy(id = "fab_done")
     public static WebElement gallerySubmit, previewSubmit, submitCrtBtn;
 
+    /**
+     * delete preview to send image
+     */
     @FindBy(id = "delete")
     public static WebElement previewDelImage;
-
-    /*===================================== ContactsPage ===================================================*/
-
-//    public static final String marked_contact = "selected_indicator";
-//
-//    @FindBy(id = "selected_indicator")
-//    public static WebElement contactMarked;
-//
-//    @FindBy(id = "list_contacts")
-//    public static WebElement contactList;
-//
-//    @FindBy(id = "public_user_empty")
-//    public static WebElement publicUserEmpty;
-//
-//    @FindBy(id = "root_view")
-//    public static List<WebElement> contactItems;
-//
-//    @FindBy(id = "info_open_chat")
-//    public static WebElement contactPublic_openChat;
-//
-//    @FindBy(id = "create_public_profile_button")
-//    public static WebElement createPublicProfileBtn;
 
 
     /*===================================== Methods ===================================================*/
@@ -163,11 +174,17 @@ public class DialogAndGroupPage extends MobilePage {
     }
 
 
+    /**
+     * Open actionBar by index
+     */
     public boolean tapActionBarTab(int index) {
         actionTabs.get(index).click();
         return true;
     }
 
+    /**
+     * Open menu
+     */
     public boolean tapMenuIcon() {
         if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
             menuIcon.click();
@@ -178,6 +195,9 @@ public class DialogAndGroupPage extends MobilePage {
         }
     }
 
+    /**
+     * Open menu item by index
+     */
     public boolean tapSideBarMenuIndex(int index) {
         if (!sideBar.isDisplayed()) {
             return false;
@@ -187,6 +207,9 @@ public class DialogAndGroupPage extends MobilePage {
         }
     }
 
+    /**
+     * Open menu item by text
+     */
     public boolean tapSideBarMenuText(String text) {
         tapMenuIcon();
         if (sideBar.isDisplayed()) {
@@ -201,7 +224,9 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
-
+    /**
+     * Open chat by index in the list
+     */
     public boolean openChatByIndex(int index) {
 
         wait.until(ExpectedConditions.visibilityOf(chatsListView));
@@ -213,6 +238,9 @@ public class DialogAndGroupPage extends MobilePage {
         } else return false;
     }
 
+    /**
+     * Open chat by name in the list
+     */
     public boolean openDialogByName(String name) {
         wait.until(ExpectedConditions.visibilityOf(chatsListView));
         if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
@@ -230,6 +258,9 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Send test text message
+     */
     public boolean sendDialogMsg() {
         if (msgBox.isDisplayed()) {
             msgTextField.click();
@@ -239,6 +270,9 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Check message status
+     */
     public boolean checkSentMsgStatus() {
 //        sendDialogMsg();
         if (bubbleMsgs.isEmpty()) {
@@ -280,6 +314,9 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Send geo message
+     */
     public boolean sendDialogGeo() {
         wait.until(ExpectedConditions.visibilityOf(msgBox));
         if (msgBox.isDisplayed()) {
@@ -289,6 +326,9 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Send image message
+     */
     public boolean sendDialogImage(int album, int count) {
         if (msgBox.isDisplayed()) {
             attachIcon.click();
@@ -305,6 +345,9 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Check disable status of submit button
+     */
     public boolean checkDisableCreateChatBtn() {
         if (submitCrtBtn.isEnabled()) {
             System.out.println("ContactsPage marked!");
@@ -315,6 +358,10 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Open user profile in contact
+     */
+    //todo: shift to contacts class
     public boolean openUserProfileFromContactList(String username) {
         for (WebElement contact : ContactsPage.contactName)
             if (contact.getText().equalsIgnoreCase(username)) {
@@ -324,6 +371,9 @@ public class DialogAndGroupPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Create chat from user profile
+     */
     public void createChatFromUserProfile() {
         wait.until(ExpectedConditions.visibilityOf(ContactsPage.contactUserProfileAvatar));
         if (ContactsPage.contact_createChatBtn.isEnabled()) {
@@ -333,8 +383,10 @@ public class DialogAndGroupPage extends MobilePage {
 
 
 
-    /*======================= Groups ==========================*/
-
+    /*========================================== Groups ============================================================*/
+    /**
+     * Open dialog chat from group chat screen
+     */
     public boolean openChatDialogByUsername(String username) {
         if (chat_user_name.isEnabled()) {
             for (WebElement user : chatUsernames)
