@@ -38,17 +38,34 @@ public class ProfileSettings {
     }
 
 
-    @Description("Check edit username of the main profile")
+    @Description("Check edit main profile username")
     @Test(groups = {"editMainUsername"}, dataProviderClass = UserDataProvider.class, dataProvider = "getEditMainName")
     public void editMainUsername(String editMainUsername) throws InterruptedException {
+
         mobileTester.openMenuItem(SETTINGS);
+        mobileTester.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
+        assertTrue(mobileTester.openMenuItem(SETTINGS));
         mobileTester.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
         tester.openEditMainProfileScreen();
         mobileTester.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля");
         tester.editMainUsername(editMainUsername);
         mobileTester.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
         assertTrue(tester.checkEditedAccountMainUsername(editMainUsername));
+
     }
+
+    @Description("Delete main profile avatar. Save profile without avatar")
+    @Test(groups = {"deleteMainUserAvatar"})
+    public void deleteMainAvatar() {
+        assertTrue(mobileTester.openMenuItem(SETTINGS));
+        mobileTester.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
+        tester.openEditMainProfileScreen();
+        mobileTester.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля");
+//        tester.addProfileAvatar(1, 0)
+//        tester.deleteProfileAvatar();
+        mobileTester.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
+    }
+
 
     @AfterClass
     public void closeApp() {
