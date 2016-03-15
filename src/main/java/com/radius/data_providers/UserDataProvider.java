@@ -16,7 +16,7 @@ public class UserDataProvider {
     @DataProvider
     public static Object[][] getPublicName(){
         return new Object[][]{
-                {"Дмитрий Публичный профиль"}
+                {"Дмитрий PublicMan"}
         };
     }
 

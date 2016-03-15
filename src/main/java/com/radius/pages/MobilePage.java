@@ -405,11 +405,6 @@ public class MobilePage {
         return true;
     }
 
-    /**
-     * Logout messenger app
-     */
-    public void logout() {
-        UserSettingsPage.logoutBtn.click();
-    }
+
 
 }

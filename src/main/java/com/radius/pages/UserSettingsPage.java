@@ -14,89 +14,54 @@ public class UserSettingsPage extends MobilePage {
 
     //todo: xpath Main and public blocks (class = android.widget.TextView)
 
-    /**
-     * logout button
-     */
     @FindBy(id = "exit_button")
-    public static WebElement logoutBtn;
+    public WebElement logoutBtn;
 
     /*----------------------------- Main Profile -------------------------------------------------*/
 
-    /**
-     * main profile avatar
-     */
     @FindBy(id = "image_view_avatar_main")
-    public static WebElement myMainAvatar;
+    public WebElement myMainAvatar;
 
-    /**
-     * main profile username
-     */
     @FindBy(id = "text_view_main_name")
-    public static WebElement myMainName;
+    public WebElement myMainName;
 
-    /**
-     * main edit profile button
-     */
     @FindBy(id = "main_edit")
-    public static WebElement mainProfileEditBtn;
+    public WebElement mainProfileEditBtn;
 
     /*------------------------------ Public Profile -----------------------------------------------*/
 
-    /**
-     * public profile avatar
-     */
     @FindBy(id = "image_view_avatar_public")
-    public static WebElement myPublicAvatar;
+    public WebElement myPublicAvatar;
 
-    /**
-     * public profile username
-     */
     @FindBy(id = "text_view_public_name")
-    public static WebElement myPublicName;
+    public WebElement myPublicName;
 
-    /**
-     * public edit profile button
-     */
     @FindBy(id = "public_edit")
-    public static WebElement publicProfileEditBtn;
+    public WebElement publicProfileEditBtn;
+
+    @FindBy(id = "create_public_profile_button")
+    public WebElement createPublicProfileBtn;
+
 
     /*---------------------------------- Edit Profile -------------------------------------------*/
 
-    /**
-     * image gallery picker
-     */
     @FindBy(id = "avatar_picker")
     public static WebElement avatar_imageBtn;
 
-    /**
-     * camera picker
-     */
     @FindBy(id = "avatar_camera")
     public static WebElement avatar_cameraBtn;
 
-    /**
-     * delete profile avatar button
-     */
     @FindBy(id = "delete_avatar")
     public static WebElement avatar_deleteBtn;
 
-    /**
-     * edit username field
-     */
     @FindBy(id = "username_text_with_edit")
     public static WebElement edit_usernameInput;
 
-    /**
-     * update profile button
-     */
     @FindBy(id = "profile_update_fab")
     public static WebElement update_profileBtn;
 
     /*--------------------------------- Image & Gallery -----------------------------------------*/
 
-    /**
-     * submit new avatar button
-     */
     @FindBy(id = "action_back_to_list")
     public static WebElement submitAvatarAction;
 
@@ -109,11 +74,12 @@ public class UserSettingsPage extends MobilePage {
     }
 
     /**
-     * Logout from App
+     * Logout from messenger App
      */
     public void logout() {
         logoutBtn.click();
     }
+
 
     public void submitEditProfile() {
         update_profileBtn.click();
@@ -137,7 +103,6 @@ public class UserSettingsPage extends MobilePage {
         if (edit_usernameInput.isEnabled()) {
             edit_usernameInput.clear();
             edit_usernameInput.sendKeys(updateUsername);
-            update_profileBtn.click();
         }
         return true;
     }
@@ -158,10 +123,7 @@ public class UserSettingsPage extends MobilePage {
      */
     public boolean deleteProfileAvatar() {
         waitForElement(avatar_deleteBtn);
-        if (avatar_deleteBtn.isEnabled()) {
-            avatar_deleteBtn.click();
-            update_profileBtn.click();
-        }
+        if (avatar_deleteBtn.isEnabled()) avatar_deleteBtn.click();
         return true;
     }
 
@@ -189,4 +151,66 @@ public class UserSettingsPage extends MobilePage {
         }
         return true;
     }
+
+    /**
+    * Update profile with empty avatar
+     */
+    public void updateProfileAvatarEmpty() {
+        waitForElement(avatar_deleteBtn);
+        if (avatar_deleteBtn.isEnabled()) {
+            avatar_deleteBtn.click();
+        }
+    }
+
+    /**
+     * Check public profile exist
+     */
+    public void createPublicProfile() {
+
+    }
+
+    /**
+    * Check public profile exist
+    */
+    public void checkPublicProfileNotExist() {
+        waitForElement(createPublicProfileBtn);
+        if (createPublicProfileBtn.isDisplayed()) {
+            System.out.println("You don't have public profile");
+        }
+    }
+
+    public void openEditPublicProfileScreen() {
+        try {
+            waitForElement(myPublicAvatar);
+            if (myPublicName.isEnabled()) publicProfileEditBtn.click();
+            else System.out.println("user settings disabled");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Edit Public profile
+     */
+    public boolean editPublicUsername(String updateUsername) {
+        waitForElement(edit_usernameInput);
+        if (edit_usernameInput.isEnabled()) {
+            edit_usernameInput.clear();
+            edit_usernameInput.sendKeys(updateUsername);
+        }
+        return true;
+    }
+
+    /**
+     * Check Public username
+     */
+    public boolean checkEditedPublicUsername(String username) {
+        waitForElement(myPublicName);
+        if (myPublicName.getText().equalsIgnoreCase(username)) {
+            System.out.println("Public username is changed!");
+        }
+        return true;
+    }
+
+
 }

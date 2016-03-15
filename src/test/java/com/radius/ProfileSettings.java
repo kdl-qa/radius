@@ -7,10 +7,13 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Description;
+import ru.yandex.qatools.allure.annotations.Title;
 
+import static com.radius.helpers.MenuItems.CHATS;
 import static com.radius.helpers.MenuItems.SETTINGS;
 import static com.radius.helpers.ScreenTitles.EDIT_PROFILE_SCREEN;
 import static com.radius.helpers.ScreenTitles.SETTINGS_SCREEN;
@@ -25,11 +28,11 @@ public class ProfileSettings {
     public static TouchActions touchScreen;
     UserSettingsPage profiler;
 
-
+    @Title("This is - Edit profile suite")
     @BeforeClass
     public void settings() {
         driver = Driver.initDriver();
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, 20);
         touchScreen = new TouchActions(driver);
         profiler = new UserSettingsPage(driver, touchScreen);
     }
@@ -38,15 +41,14 @@ public class ProfileSettings {
     @Description("Check edit main profile username")
     @Test(groups = {"editMainUsername"}, dataProviderClass = UserDataProvider.class, dataProvider = "getEditMainName")
     public void editMainUsername(String editMainUsername) throws InterruptedException {
-
         profiler.openMenuItem(SETTINGS);
         profiler.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
         profiler.openEditMainProfileScreen();
         profiler.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля");
         profiler.editMainUsername(editMainUsername);
+        profiler.submitEditProfile();
         profiler.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
         assertTrue(profiler.checkEditedMainUsername(editMainUsername));
-
     }
 
     @Description("Add the avatar to main profile  Save profile without avatar")
@@ -68,7 +70,8 @@ public class ProfileSettings {
         profiler.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
         profiler.openEditMainProfileScreen();
         profiler.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля");
-        profiler.addProfileAvatar(1, 0);
+        profiler.updateProfileAvatarEmpty();
+        profiler.submitEditProfile();
         assertTrue(profiler.checkScreenTitle(SETTINGS_SCREEN, "Настройки"));
     }
 
@@ -79,9 +82,26 @@ public class ProfileSettings {
         profiler.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
         profiler.openEditMainProfileScreen();
         profiler.checkScreenTitle(EDIT_PROFILE_SCREEN, "Редактирование профиля");
-//        profiler.addProfileAvatar(1, 0)
-//        profiler.deleteProfileAvatar();
+        profiler.addProfileAvatar(1, 0);
+        profiler.submitEditProfile();
+        profiler.openEditMainProfileScreen();
+        profiler.deleteProfileAvatar();
+        profiler.submitEditProfile();
         assertTrue(profiler.checkScreenTitle(SETTINGS_SCREEN, "Настройки"));
+    }
+
+    @Description("Create public profile account")
+    @Test(groups = {"createPublicProfileAccount"}, dataProviderClass = UserDataProvider.class, dataProvider = "getPublicName")
+    public void createPublicAccount() {
+        profiler.openMenuItem(SETTINGS);
+        profiler.checkScreenTitle(SETTINGS_SCREEN, "Настройки");
+        
+
+    }
+
+    @AfterGroups(groups = {"", "", "", ""})
+    public void navigateBack() {
+        profiler.openMenuItem(CHATS);
     }
 
 

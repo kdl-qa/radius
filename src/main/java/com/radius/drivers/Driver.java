@@ -25,8 +25,8 @@ public class Driver {
             capabilities.setCapability("deviceName", "Redmi");
             capabilities.setCapability("platformName", "Android");
             capabilities.setCapability("unicodeKeyboard", true);
-            capabilities.setCapability("appPackage", AppActivities.STAGE_PACKAGE);
-            capabilities.setCapability("appActivity", AppActivities.STAGE_ACTIVITY);
+            capabilities.setCapability("appPackage", AppActivities.PROD_PACKAGE);
+            capabilities.setCapability("appActivity", AppActivities.PROD_ACTIVITY);
 //            capabilities.setCapability("appActivity", AppActivities.STAGE_EMULATOR_ACTIVITY);
             driver = new SwipeableDriver(new URL(APPIUM_SERVER_URL), capabilities);
 

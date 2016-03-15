@@ -13,6 +13,7 @@ import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Description;
+import ru.yandex.qatools.allure.annotations.Title;
 
 import static com.radius.helpers.AppTabs.*;
 import static com.radius.helpers.MenuItems.CHATS;
@@ -31,6 +32,7 @@ public class Dialog {
     DialogAndGroupPage chatsTester;
     MobilePage mobileTester;
 
+    @Title("This is - create Dialog suite")
     @BeforeClass
     public void dialog() {
         driver = Driver.initDriver();
