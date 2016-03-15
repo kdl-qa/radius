@@ -33,7 +33,7 @@ public class Driver {
 //            //TODO: Delete PageFactory in future refactoring
 //            PageFactory.initElements(driver, UserSettingsPage.class);
 //            PageFactory.initElements(driver, DialogAndGroupPage.class); //path to locator class???
-//            PageFactory.initElements(driver, Contacts.class);
+//            PageFactory.initElements(driver, ContactsPage.class);
 ////            PageFactory.initElements(driver, Helpers.class);
 
         } catch (Exception e) {

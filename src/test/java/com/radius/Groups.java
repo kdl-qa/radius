@@ -16,14 +16,14 @@ public class Groups {
     public static AndroidDriver driver;
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
-    DialogAndGroupPage chatsTester;
+    DialogAndGroupPage groupTester;
 
     @BeforeClass
     public void group() {
         driver = Driver.initDriver();
         wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
-        chatsTester = new DialogAndGroupPage(driver, wait, touchScreen);
+        groupTester = new DialogAndGroupPage(driver, touchScreen);
     }
 
     @Test (groups = {"createGroup"}, priority = 0, enabled = false)

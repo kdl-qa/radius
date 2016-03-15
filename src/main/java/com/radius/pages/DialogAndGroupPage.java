@@ -1,5 +1,7 @@
 package com.radius.pages;
 
+import com.radius.helpers.AppTabs;
+import com.radius.helpers.ScreenTitles;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,7 +10,6 @@ import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class DialogAndGroupPage extends MobilePage {
 
     /*===================================== Locators ===================================================*/
+
 
     /**
      * user contact marked to chat
@@ -150,23 +152,17 @@ public class DialogAndGroupPage extends MobilePage {
 
     /*===================================== Attach List ===================================================*/
 
-    /**
-     * album or image
-     */
-    @FindBy(id = "image")
-    public static List<WebElement> imagesList;
-
-    /**
-     * gallery submit button
-     */
-    @FindBy(id = "fab_done")
-    public static WebElement gallerySubmit, previewSubmit, submitCrtBtn;
-
-    /**
-     * delete preview to send image
-     */
-    @FindBy(id = "delete")
-    public static WebElement previewDelImage;
+//    /**
+//     * album or image
+//     */
+//    @FindBy(id = "image")
+//    public static List<WebElement> imagesList;
+//
+//    /**
+//     * delete preview to send image
+//     */
+//    @FindBy(id = "delete")
+//    public static WebElement previewDelImage;
 
 
     /*===================================== Methods ===================================================*/
@@ -174,59 +170,89 @@ public class DialogAndGroupPage extends MobilePage {
     /**
      * Constructor
      */
-    public DialogAndGroupPage(AndroidDriver driver, WebDriverWait wait, TouchActions touchScreen) {
-        super(driver, wait, touchScreen);
+    public DialogAndGroupPage(AndroidDriver driver, TouchActions touchScreen) {
+        super(driver, touchScreen);
         PageFactory.initElements(driver, this);
+    }
+
+    /**
+     * Check title of the screen presence
+     */
+    @Override
+    public boolean checkScreenTitle(ScreenTitles screenTitle, String expectedScreenTitle) {
+        switch (screenTitle) {
+            case CHATS_SCREEN:
+                waitForElement(chatsScreenTitle);
+                System.out.println("chats screen");
+                return navTitle.getText().equals(expectedScreenTitle);
+            case DIALOG_SCREEN:
+            case GROUP_SCREEN:
+                waitForElement(chatTitle);
+                System.out.println("dialog / group screen");
+                return chatTitle.getText().equals(expectedScreenTitle);
+            case CREATE_CHAT_SCREEN:
+            case CONTACTS_SCREEN:
+            case CONTACT_PROFILE_SCREEN:
+                waitForElement(actionBar);
+                System.out.println("create chat / contact / settings / edit");
+                return navTitle.getText().equals(expectedScreenTitle);
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Open ActionTab by index
+     */
+    public boolean openActionTab(AppTabs expectedTab) {
+        switch (expectedTab) {
+            case MAIN_CONTACTS_TAB:
+            case DIALOG_TAB:
+                actionTabs.get(0).click();
+                waitForElement(actionTabs.get(0));
+                return actionTabs.get(0).isSelected();
+            case PUBLIC_CONTACTS_TAB:
+            case GROUP_TAB:
+                actionTabs.get(1).click();
+                waitForElement(actionTabs.get(1));
+                return actionTabs.get(1).isSelected();
+            case VENUES_TAB:
+                actionTabs.get(2).click();
+                waitForElement(actionTabs.get(2));
+                return actionTabs.get(2).isSelected();
+            default:
+                return false;
+        }
     }
 
 
     /**
-     * Open actionBar by index
+     * Open contacts list (Chats) for chat
      */
-    public boolean tapActionBarTab(int index) {
-        actionTabs.get(index).click();
+    public boolean createChat() {
+        waitForElement(createChatBtn);
+        DialogAndGroupPage.createChatBtn.click();
         return true;
     }
 
     /**
-     * Open menu
+     * Submit create chat
      */
-    public boolean tapMenuIcon() {
-        if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
-            menuIcon.click();
-            return true;
-        } else {
-            System.out.println("Tap on the Menu button is failed!!!");
-            return false;
+    public boolean submitCreateChat() {
+        if (DialogAndGroupPage.contactMarked.isDisplayed()) {
+            DialogAndGroupPage.submitCrtBtn.click();
         }
+        return true;
     }
 
     /**
-     * Open menu item by index
+     * Check chat presence
      */
-    public boolean tapSideBarMenuIndex(int index) {
-        if (!sideBar.isDisplayed()) {
-            return false;
-        } else {
-            sideBarMenuItems.get(index).click();
-            return true;
-        }
-    }
-
-    /**
-     * Open menu item by text
-     */
-    public boolean tapSideBarMenuText(String text) {
-        tapMenuIcon();
-        if (sideBar.isDisplayed()) {
-            for (WebElement item : sideBarMenuItems)
-                if (item.getText().equalsIgnoreCase(text)) {
-                    item.click();
-                    break;
-                } else continue;
-
-        } else
-            touchScreen.flick(sideBar, -10, 0, 80).perform();
+    public boolean checkChatPresence(String chatName) {
+        for (WebElement contact : DialogAndGroupPage.chatItemName)
+            if (contact.getText().equalsIgnoreCase(chatName)) {
+                break;
+            } else System.out.println("Chat has another name!");
         return true;
     }
 
@@ -235,7 +261,7 @@ public class DialogAndGroupPage extends MobilePage {
      */
     public boolean openChatByIndex(int index) {
 
-        wait.until(ExpectedConditions.visibilityOf(chatsListView));
+        waitForElement(chatsListView);
         if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
             if (chatItemName.isEmpty()) {
                 System.out.println("You don't have any chats");
@@ -248,7 +274,7 @@ public class DialogAndGroupPage extends MobilePage {
      * Open chat by name in the list
      */
     public boolean openDialogByName(String name) {
-        wait.until(ExpectedConditions.visibilityOf(chatsListView));
+        waitForElement(chatsListView);
         if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
             if (chatItemName.isEmpty()) {
                 System.out.println("You don't have any chats");
@@ -356,10 +382,10 @@ public class DialogAndGroupPage extends MobilePage {
      */
     public boolean checkDisableCreateChatBtn() {
         if (submitCrtBtn.isEnabled()) {
-            System.out.println("Contacts marked!");
+            System.out.println("ContactsPage marked!");
             return false;
         } else {
-            System.out.println("Contacts aren't marked! Submit button isn't enable!");
+            System.out.println("ContactsPage aren't marked! Submit button isn't enable!");
         }
         return true;
     }
@@ -369,7 +395,7 @@ public class DialogAndGroupPage extends MobilePage {
      */
     //todo: shift to contacts class
     public boolean openUserProfileFromContactList(String username) {
-        for (WebElement contact : Contacts.contactName)
+        for (WebElement contact : ContactsPage.contactName)
             if (contact.getText().equalsIgnoreCase(username)) {
                 contact.click();
                 break;
@@ -381,9 +407,9 @@ public class DialogAndGroupPage extends MobilePage {
      * Create chat from user profile
      */
     public void createChatFromUserProfile() {
-        wait.until(ExpectedConditions.visibilityOf(Contacts.contactUserProfileAvatar));
-        if (Contacts.contact_createChatBtn.isEnabled()) {
-            Contacts.contact_createChatBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(ContactsPage.contactUserProfileAvatar));
+        if (ContactsPage.contact_createChatBtn.isEnabled()) {
+            ContactsPage.contact_createChatBtn.click();
         }
     }
 
@@ -407,6 +433,7 @@ public class DialogAndGroupPage extends MobilePage {
         }
         return true;
     }
+
 
 
 }

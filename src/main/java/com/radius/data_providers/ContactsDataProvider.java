@@ -17,7 +17,7 @@ public class ContactsDataProvider {
     @DataProvider
     public static Object[][] getMainContact1() {
         return new Object[][]{
-                {"Алексей Берлин"}
+                {"trinity tester"}
         };
     }
 

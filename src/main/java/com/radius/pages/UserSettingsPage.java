@@ -4,8 +4,6 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by kdl on 25.02.16.
@@ -106,8 +104,8 @@ public class UserSettingsPage extends MobilePage {
     /**
      * Constructor
      */
-    public UserSettingsPage(AndroidDriver driver, WebDriverWait wait, TouchActions touchScreen) {
-        super(driver, wait, touchScreen);
+    public UserSettingsPage(AndroidDriver driver, TouchActions touchScreen) {
+        super(driver, touchScreen);
     }
 
     /**
@@ -117,9 +115,13 @@ public class UserSettingsPage extends MobilePage {
         logoutBtn.click();
     }
 
+    public void submitEditProfile() {
+        update_profileBtn.click();
+    }
+
     public void openEditMainProfileScreen() {
         try {
-            wait.until(ExpectedConditions.visibilityOf(myMainAvatar));
+            waitForElement(myMainAvatar);
             if (myMainName.isEnabled()) mainProfileEditBtn.click();
             else System.out.println("user settings disabled");
         } catch (Exception e) {
@@ -131,7 +133,7 @@ public class UserSettingsPage extends MobilePage {
      * Edit main profile
      */
     public boolean editMainUsername(String updateUsername) {
-        wait.until(ExpectedConditions.visibilityOf(edit_usernameInput));
+        waitForElement(edit_usernameInput);
         if (edit_usernameInput.isEnabled()) {
             edit_usernameInput.clear();
             edit_usernameInput.sendKeys(updateUsername);
@@ -143,8 +145,8 @@ public class UserSettingsPage extends MobilePage {
     /**
      * Check Main username
      */
-    public boolean checkEditedAccountMainUsername(String username) {
-        wait.until(ExpectedConditions.visibilityOf(myMainName));
+    public boolean checkEditedMainUsername(String username) {
+        waitForElement(myMainName);
         if (myMainName.getText().equalsIgnoreCase(username)) {
             System.out.println("Username is changed!");
         }
@@ -155,7 +157,7 @@ public class UserSettingsPage extends MobilePage {
      * Delete profile avatar
      */
     public boolean deleteProfileAvatar() {
-        wait.until(ExpectedConditions.visibilityOf(avatar_deleteBtn));
+        waitForElement(avatar_deleteBtn);
         if (avatar_deleteBtn.isEnabled()) {
             avatar_deleteBtn.click();
             update_profileBtn.click();
@@ -167,10 +169,10 @@ public class UserSettingsPage extends MobilePage {
      * Update avatar from gallery
      */
     public boolean chooseAvatarFromGallery(int album, int imgIndex) {
-        if (!DialogAndGroupPage.imagesList.isEmpty()) {
-            DialogAndGroupPage.imagesList.get(album).click();
-            DialogAndGroupPage.imagesList.get(imgIndex).click();
-            DialogAndGroupPage.gallerySubmit.click();
+        if (!imagesList.isEmpty()) {
+            imagesList.get(album).click();
+            imagesList.get(imgIndex).click();
+            gallerySubmit.click();
             submitAvatarAction.click();
         }
         return true;
@@ -180,11 +182,10 @@ public class UserSettingsPage extends MobilePage {
      * Change profile avatar
      */
     public boolean addProfileAvatar(int album, int img_index) {
-        wait.until(ExpectedConditions.visibilityOf(avatar_imageBtn));
+        waitForElement(avatar_imageBtn);
         if (!avatar_deleteBtn.isEnabled()) {
             avatar_imageBtn.click();
             chooseAvatarFromGallery(album, img_index);
-            update_profileBtn.click();
         }
         return true;
     }
