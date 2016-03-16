@@ -272,6 +272,7 @@ public class MobilePage {
      * Open menu item using CONSTANT
      */
     public boolean openMenuItem(MenuItems menu_item) {
+        waitForElement(actionBar);
         menuIcon.click();
         switch (menu_item) {
             case CHATS:

@@ -1,6 +1,8 @@
 package com.radius.pages;
 
+import com.radius.helpers.ScreenTitles;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +44,8 @@ public class UserSettingsPage extends MobilePage {
     @FindBy(id = "create_public_profile_button")
     public WebElement createPublicProfileBtn;
 
+    @FindBy(xpath = "//android.widget.TextView[@text='У вас не создан публичный профиль']")
+    public WebElement noPublicProfileSettingsLabel;
 
     /*---------------------------------- Edit Profile -------------------------------------------*/
 
@@ -80,11 +84,39 @@ public class UserSettingsPage extends MobilePage {
         logoutBtn.click();
     }
 
+    /**
+     * Check title of the screen presence
+     */
+    @Override
+    public boolean checkScreenTitle(ScreenTitles screenTitle, String expectedScreenTitle) {
+        switch (screenTitle) {
+            case SETTINGS_SCREEN:
+                waitForElement(actionBar);
+                System.out.println("settings screen");
+                return navTitle.getText().equals(expectedScreenTitle);
+            case EDIT_PROFILE_SCREEN:
+                waitForElement(actionBar);
+                System.out.println("edit profile screen");
+                return navTitle.getText().equals(expectedScreenTitle);
+            case CREATE_PUBLIC_PROFILE_SCREEN:
+                waitForElement(actionBar);
+                System.out.println("create public profile screen");
+                return navTitle.getText().equals(expectedScreenTitle);
+            default:
+                return false;
+        }
+    }
 
+    /**
+     * Submit edit profile
+     */
     public void submitEditProfile() {
         update_profileBtn.click();
     }
 
+    /**
+     * Open main profile edit screen
+     */
     public void openEditMainProfileScreen() {
         try {
             waitForElement(myMainAvatar);
@@ -96,7 +128,7 @@ public class UserSettingsPage extends MobilePage {
     }
 
     /**
-     * Edit main profile
+     * Edit main profile username
      */
     public boolean editMainUsername(String updateUsername) {
         waitForElement(edit_usernameInput);
@@ -108,7 +140,7 @@ public class UserSettingsPage extends MobilePage {
     }
 
     /**
-     * Check Main username
+     * Check edited main username
      */
     public boolean checkEditedMainUsername(String username) {
         waitForElement(myMainName);
@@ -144,10 +176,34 @@ public class UserSettingsPage extends MobilePage {
      * Change profile avatar
      */
     public boolean addProfileAvatar(int album, int img_index) {
+//        waitForElement(avatar_imageBtn);
+//        try {
+//            if (avatar_imageBtn.isDisplayed()) {
+//                avatar_imageBtn.click();
+//                chooseAvatarFromGallery(album, img_index);
+//            } else if (avatar_deleteBtn.isDisplayed()) {
+//                avatar_deleteBtn.click();
+//                avatar_imageBtn.click();
+//                chooseAvatarFromGallery(album, img_index);
+//            }
+//        }
+//        catch (NoSuchElementException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return true;
         waitForElement(avatar_imageBtn);
-        if (!avatar_deleteBtn.isEnabled()) {
+        try {
+            if (avatar_deleteBtn.isDisplayed()) {
+                avatar_deleteBtn.click();
+                avatar_imageBtn.click();
+                chooseAvatarFromGallery(album, img_index);
+            }
+        }
+        catch (NoSuchElementException e) {
+//            avatar_deleteBtn.click();
             avatar_imageBtn.click();
             chooseAvatarFromGallery(album, img_index);
+//            System.out.println(e.getMessage());
         }
         return true;
     }
@@ -155,19 +211,50 @@ public class UserSettingsPage extends MobilePage {
     /**
     * Update profile with empty avatar
      */
-    public void updateProfileAvatarEmpty() {
+    public boolean updateProfileAvatarEmpty() {
         waitForElement(avatar_deleteBtn);
         if (avatar_deleteBtn.isEnabled()) {
             avatar_deleteBtn.click();
+        } else if (!avatar_deleteBtn.isDisplayed()) {
+            return true;
+        }
+        return true;
+    }
+
+    /**
+     * Open public profile create screen
+     */
+    public void openCreatePublicProfileScreen() {
+        waitForElement(createPublicProfileBtn);
+        if (noPublicProfileSettingsLabel.isDisplayed()) {
+            createPublicProfileBtn.click();
         }
     }
 
     /**
-     * Check public profile exist
+     * Create public profile
      */
-    public void createPublicProfile() {
-
+    public boolean createPublicProfile(String fillUsername) {
+        waitForElement(edit_usernameInput);
+        if (edit_usernameInput.isEnabled()) {
+            edit_usernameInput.sendKeys(fillUsername);
+        }
+        return true;
     }
+
+    /**
+     * Edit public profile
+     */
+    public boolean editPublicProfile(String editUsername) {
+        waitForElement(edit_usernameInput);
+        if (edit_usernameInput.isEnabled()) {
+            edit_usernameInput.clear();
+            edit_usernameInput.sendKeys(editUsername);
+        }
+        return true;
+    }
+
+
 
     /**
     * Check public profile exist
@@ -183,7 +270,7 @@ public class UserSettingsPage extends MobilePage {
         try {
             waitForElement(myPublicAvatar);
             if (myPublicName.isEnabled()) publicProfileEditBtn.click();
-            else System.out.println("user settings disabled");
+            else System.out.println("public user settings disabled");
         } catch (Exception e) {
             e.printStackTrace();
         }

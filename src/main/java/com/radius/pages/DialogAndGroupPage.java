@@ -194,7 +194,7 @@ public class DialogAndGroupPage extends MobilePage {
             case CONTACTS_SCREEN:
             case CONTACT_PROFILE_SCREEN:
                 waitForElement(actionBar);
-                System.out.println("create chat / contact / settings / edit");
+                System.out.println("create chat / contact profile ");
                 return navTitle.getText().equals(expectedScreenTitle);
             default:
                 return false;

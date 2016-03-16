@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Title;
 
 /**
  * Created by kdl on 16.02.16.
@@ -18,10 +19,11 @@ public class Groups {
     public static TouchActions touchScreen;
     DialogAndGroupPage groupTester;
 
+    @Title("This is create Group suite")
     @BeforeClass
     public void group() {
         driver = Driver.initDriver();
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, 20);
         touchScreen = new TouchActions(driver);
         groupTester = new DialogAndGroupPage(driver, touchScreen);
     }

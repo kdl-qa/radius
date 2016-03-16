@@ -2,9 +2,6 @@ package com.radius.data_providers;
 
 import org.testng.annotations.DataProvider;
 
-/**
- * Created by kdl on 28.02.16.
- */
 public class UserDataProvider {
     @DataProvider
     public static Object[][] getEditMainName() {

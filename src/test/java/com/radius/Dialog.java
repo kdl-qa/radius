@@ -2,6 +2,7 @@ package com.radius;
 
 import com.radius.data_providers.ContactsDataProvider;
 import com.radius.drivers.Driver;
+import com.radius.helpers.AppData;
 import com.radius.pages.ContactsPage;
 import com.radius.pages.DialogAndGroupPage;
 import com.radius.pages.MobilePage;
@@ -57,17 +58,17 @@ public class Dialog {
 
     @Description("Check creating dialog chat using create_chat button from Dialog tab")
     @Test (groups = {"createDialogMainContactFromDialogTab"}, dataProviderClass = ContactsDataProvider.class, dataProvider = "getMainContact1")
-    public void createChatFromDialogTab(String mainContact) {
+    public void createChatFromDialogTab(String mainContact1) {
         ContactsPage contacts = new ContactsPage(driver, touchScreen);
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
         chatsTester.checkScreenTitle(CHATS_SCREEN, "Чаты");
         chatsTester.createChat();
         chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, "Создать Чат");
-        chatsTester.checkContactPresence(mainContact);
-        contacts.tapOnContact(mainContact);
+        chatsTester.checkContactPresence(mainContact1);
+        contacts.tapOnContact(mainContact1);
         chatsTester.submitCreateChat();
-        assertTrue(chatsTester.checkScreenTitle(DIALOG_SCREEN, mainContact));
+        assertTrue(chatsTester.checkScreenTitle(DIALOG_SCREEN, mainContact1));
     }
 
     @Description("Check creating dialog chat using create_chat button from Group tab")
@@ -90,7 +91,7 @@ public class Dialog {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(GROUP_TAB);
         chatsTester.openChatByIndex(0);
-        chatsTester.checkScreenTitle(GROUP_SCREEN, "Групповой Чат");
+        chatsTester.checkScreenTitle(GROUP_SCREEN, AppData.defaultGroupNameScreenTitle);
         chatsTester.openChatDialogByUsername(mainContact1);
         assertTrue(chatsTester.checkScreenTitle(DIALOG_SCREEN, mainContact1));
     }
@@ -99,7 +100,7 @@ public class Dialog {
     @Test (groups = {"createDialogFromMainUserProfile"}, dataProviderClass = ContactsDataProvider.class, dataProvider = "getMainContact1")
     public void createChatFromContactList(String mainContact1) {
         chatsTester.openMenuItem(CONTACTS);
-        chatsTester.checkScreenTitle(CONTACTS_SCREEN, "Контакты");
+        chatsTester.checkScreenTitle(CONTACTS_SCREEN, AppData.contactsScreenTitle);
         chatsTester.openUserProfileFromContactList(mainContact1);
 //        chatsTester.checkScreenTitle(CONTACT_PROFILE_SCREEN, mainContact1);
         chatsTester.createChatFromUserProfile();
@@ -112,9 +113,9 @@ public class Dialog {
         ContactsPage contacts = new ContactsPage(driver, touchScreen);
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
-        chatsTester.checkScreenTitle(CHATS_SCREEN, "Чаты");
+        chatsTester.checkScreenTitle(CHATS_SCREEN, AppData.chatsScreenTitle);
         chatsTester.createChat();
-        chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, "Создать Чат");
+        chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, AppData.createChatScreenTitle);
         chatsTester.openActionTab(MAIN_CONTACTS_TAB);
         assertTrue(contacts.checkContactListTabs("main_profile"));
         chatsTester.openActionTab(PUBLIC_CONTACTS_TAB);
