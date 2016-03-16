@@ -130,7 +130,7 @@ public class UserSettingsPage extends MobilePage {
     /**
      * Edit main profile username
      */
-    public boolean editMainUsername(String updateUsername) {
+    public boolean editProfileAccountUsername(String updateUsername) {
         waitForElement(edit_usernameInput);
         if (edit_usernameInput.isEnabled()) {
             edit_usernameInput.clear();
@@ -176,21 +176,6 @@ public class UserSettingsPage extends MobilePage {
      * Change profile avatar
      */
     public boolean addProfileAvatar(int album, int img_index) {
-//        waitForElement(avatar_imageBtn);
-//        try {
-//            if (avatar_imageBtn.isDisplayed()) {
-//                avatar_imageBtn.click();
-//                chooseAvatarFromGallery(album, img_index);
-//            } else if (avatar_deleteBtn.isDisplayed()) {
-//                avatar_deleteBtn.click();
-//                avatar_imageBtn.click();
-//                chooseAvatarFromGallery(album, img_index);
-//            }
-//        }
-//        catch (NoSuchElementException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return true;
         waitForElement(avatar_imageBtn);
         try {
             if (avatar_deleteBtn.isDisplayed()) {
@@ -203,7 +188,6 @@ public class UserSettingsPage extends MobilePage {
 //            avatar_deleteBtn.click();
             avatar_imageBtn.click();
             chooseAvatarFromGallery(album, img_index);
-//            System.out.println(e.getMessage());
         }
         return true;
     }
@@ -211,6 +195,7 @@ public class UserSettingsPage extends MobilePage {
     /**
     * Update profile with empty avatar
      */
+    //TODO change to try catch structure
     public boolean updateProfileAvatarEmpty() {
         waitForElement(avatar_deleteBtn);
         if (avatar_deleteBtn.isEnabled()) {

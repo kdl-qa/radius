@@ -40,14 +40,14 @@ public class ProfileSettings {
     }
 
 
-    @Description("Check after edit the Main profile username")
-    @Test(groups = {"editMainUsername"}, dataProviderClass = UserDataProvider.class, dataProvider = "getEditMainName")
-    public void editMainProfileUsername(String editMainUsername) throws InterruptedException {
+    @Description("Check the Main profile username after edit")
+    @Test(groups = {"editMainProfileUsername"}, dataProviderClass = UserDataProvider.class, dataProvider = "getEditMainName")
+    public void editMainProfileUsername(String editMainUsername) {
         profiler.openMenuItem(SETTINGS);
         profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
         profiler.openEditMainProfileScreen();
         profiler.checkScreenTitle(EDIT_PROFILE_SCREEN, AppData.editProfileScreenTitle);
-        profiler.editMainUsername(editMainUsername);
+        profiler.editProfileAccountUsername(editMainUsername);
         profiler.submitEditProfile();
         profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
         assertTrue(profiler.checkEditedMainUsername(editMainUsername));
@@ -102,9 +102,9 @@ public class ProfileSettings {
         profiler.checkScreenTitle(CREATE_PUBLIC_PROFILE_SCREEN, AppData.createPublicProfileScreenTitle);
         profiler.openCreatePublicProfileScreen();
         profiler.createPublicProfile(addPublicUsername);
-//        profiler.submitEditProfile();
-//        profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
-//        assertTrue(profiler.checkEditedPublicUsername(addPublicUsername));
+        profiler.submitEditProfile();
+        profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
+        assertTrue(profiler.checkEditedPublicUsername(addPublicUsername));
     }
 
     @Description("Create a Public profile account with the avatar")
@@ -122,10 +122,54 @@ public class ProfileSettings {
         assertTrue(profiler.checkEditedPublicUsername(addPublicUsername));
     }
 
+    @Description("Check the Public profile username after edit")
+    @Test(groups = {"editPublicProfileUsername"}, dataProviderClass = UserDataProvider.class, dataProvider = "getEditPublicName")
+    public void editPublicProfileUsername(String editPublicUsername) {
+        profiler.openMenuItem(SETTINGS);
+        profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
+        profiler.openEditPublicProfileScreen();
+        profiler.checkScreenTitle(EDIT_PROFILE_SCREEN, AppData.editProfileScreenTitle);
+        profiler.editProfileAccountUsername(editPublicUsername);
+        profiler.submitEditProfile();
+        profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
+        assertTrue(profiler.checkEditedPublicUsername(editPublicUsername));
+    }
+
+
+    @Description("Add an avatar to the Public profile")
+    @Test(groups = {"addPublicUserAvatar"})
+    public void uploadPublicProfileAvatar() {
+        profiler.openMenuItem(SETTINGS);
+        profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
+        profiler.openEditPublicProfileScreen();
+        profiler.checkScreenTitle(EDIT_PROFILE_SCREEN, AppData.editProfileScreenTitle);
+        profiler.addProfileAvatar(0, 0);
+        profiler.submitEditProfile();
+        assertTrue(profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle));
+    }
+
+    @Description("Save Public profile without user avatar")
+    @Test(groups = {"savePublicProfileAvatarEmpty"})
+    public void savePublicProfileAvatarEmpty() {
+        profiler.openMenuItem(SETTINGS);
+        profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle);
+        profiler.openEditPublicProfileScreen();
+        profiler.checkScreenTitle(EDIT_PROFILE_SCREEN, AppData.editProfileScreenTitle);
+        profiler.updateProfileAvatarEmpty();
+        profiler.submitEditProfile();
+        assertTrue(profiler.checkScreenTitle(SETTINGS_SCREEN, AppData.settingsScreenTitle));
+    }
+
+    @Description("Log out from the Radius messenger")
+    @Test(groups = {"savePublicProfileAvatarEmpty"})
+    public void logoutMessengerApp() {
+        profiler.openMenuItem(SETTINGS);
+        profiler.logout();
+    }
 
 
 
-    @AfterGroups(groups = {"", "", "", ""})
+        @AfterGroups(groups = {"", "", "", ""})
     public void navigateBack() {
         profiler.openMenuItem(CHATS);
     }

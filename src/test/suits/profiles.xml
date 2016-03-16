@@ -6,10 +6,16 @@
         <classes>
             <class name="com.radius.ProfileSettings">
                 <methods>
-                    <include name=""/>
-                    <include name=""/>
-                    <include name=""/>
-                    <include name=""/>
+                    <include name="editMainProfileUsername"/>
+                    <include name="uploadMainProfileAvatar"/>
+                    <include name="saveMainProfileAvatarEmpty"/>
+                    <include name="loadAndDeleteMainAvatar"/>
+                    <!--<include name="createPublicAccount"/>-->
+                    <!--<include name="createPublicAccountWithAvatar"/>-->
+                    <include name="editPublicProfileUsername"/>
+                    <include name="uploadPublicProfileAvatar"/>
+                    <include name="savePublicProfileAvatarEmpty"/>
+                    <include name="logoutMessengerApp"/>
                 </methods>
             </class>
         </classes>

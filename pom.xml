@@ -27,7 +27,7 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${basedir}/src/test/suits/create-dialog.xml</suiteXmlFile>
+                        <suiteXmlFile>${basedir}/src/test/suits/profiles.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
                 <dependencies>
