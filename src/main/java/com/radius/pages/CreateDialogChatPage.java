@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 
-public class DialogAndGroupPage extends MobilePage {
+public class CreateDialogChatPage extends MobilePage {
 
     /*===================================== Locators ===================================================*/
 
@@ -170,7 +170,7 @@ public class DialogAndGroupPage extends MobilePage {
     /**
      * Constructor
      */
-    public DialogAndGroupPage(AndroidDriver driver, TouchActions touchScreen) {
+    public CreateDialogChatPage(AndroidDriver driver, TouchActions touchScreen) {
         super(driver, touchScreen);
         PageFactory.initElements(driver, this);
     }
@@ -204,22 +204,23 @@ public class DialogAndGroupPage extends MobilePage {
     /**
      * Open ActionTab by index
      */
+    @Override
     public boolean openActionTab(AppTabs expectedTab) {
         switch (expectedTab) {
-            case MAIN_CONTACTS_TAB:
+//            case MAIN_CONTACTS_TAB:
             case DIALOG_TAB:
                 actionTabs.get(0).click();
                 waitForElement(actionTabs.get(0));
                 return actionTabs.get(0).isSelected();
-            case PUBLIC_CONTACTS_TAB:
+//            case PUBLIC_CONTACTS_TAB:
             case GROUP_TAB:
                 actionTabs.get(1).click();
                 waitForElement(actionTabs.get(1));
                 return actionTabs.get(1).isSelected();
-            case VENUES_TAB:
-                actionTabs.get(2).click();
-                waitForElement(actionTabs.get(2));
-                return actionTabs.get(2).isSelected();
+//            case VENUES_TAB:
+//                actionTabs.get(2).click();
+//                waitForElement(actionTabs.get(2));
+//                return actionTabs.get(2).isSelected();
             default:
                 return false;
         }
@@ -229,9 +230,9 @@ public class DialogAndGroupPage extends MobilePage {
     /**
      * Open contacts list (Chats) for chat
      */
-    public boolean createChat() {
+    public boolean openCreateChatMembersList() {
         waitForElement(createChatBtn);
-        DialogAndGroupPage.createChatBtn.click();
+        CreateDialogChatPage.createChatBtn.click();
         return true;
     }
 
@@ -239,8 +240,8 @@ public class DialogAndGroupPage extends MobilePage {
      * Submit create chat
      */
     public boolean submitCreateChat() {
-        if (DialogAndGroupPage.contactMarked.isDisplayed()) {
-            DialogAndGroupPage.submitCrtBtn.click();
+        if (CreateDialogChatPage.contactMarked.isDisplayed()) {
+            CreateDialogChatPage.submitCrtBtn.click();
         }
         return true;
     }
@@ -249,7 +250,7 @@ public class DialogAndGroupPage extends MobilePage {
      * Check chat presence
      */
     public boolean checkChatPresence(String chatName) {
-        for (WebElement contact : DialogAndGroupPage.chatItemName)
+        for (WebElement contact : CreateDialogChatPage.chatItemName)
             if (contact.getText().equalsIgnoreCase(chatName)) {
                 break;
             } else System.out.println("Chat has another name!");
@@ -273,15 +274,15 @@ public class DialogAndGroupPage extends MobilePage {
     /**
      * Open chat by name in the list
      */
-    public boolean openDialogByName(String name) {
+    public boolean openChatByName(String name) {
         waitForElement(chatsListView);
         if (actionBar.isDisplayed() & chatsScreenTitle.isDisplayed()) {
             if (chatItemName.isEmpty()) {
                 System.out.println("You don't have any chats");
             } else {
-                for (WebElement dialog_name : chatItemName) {
-                    if (dialog_name.getText().equalsIgnoreCase(name)) {
-                        dialog_name.click();
+                for (WebElement chat_name : chatItemName) {
+                    if (chat_name.getText().equalsIgnoreCase(name)) {
+                        chat_name.click();
                         break;
                     } else System.out.println("It isn't dialog with the " + name + " !!!");
                 }
@@ -350,21 +351,36 @@ public class DialogAndGroupPage extends MobilePage {
      * Send geo message
      */
     public boolean sendDialogGeo() {
-        wait.until(ExpectedConditions.visibilityOf(msgBox));
+        openAttachMessageList();
+        chooseAttachMessageItem(0);
+        return true;
+    }
+
+    /**
+     * Open message box attach list
+     */
+    public void openAttachMessageList() {
+        waitForElement(msgBox);
         if (msgBox.isDisplayed()) {
             attachIcon.click();
-            attachList.get(0).click();
         }
-        return true;
+    }
+
+    /**
+     * Open message box attach list
+     */
+    public void chooseAttachMessageItem(int index) {
+        waitForListElements(attachList);
+        attachList.get(index).click();
+
     }
 
     /**
      * Send image message
      */
     public boolean sendDialogImage(int album, int count) {
-        if (msgBox.isDisplayed()) {
-            attachIcon.click();
-            attachList.get(1).click();
+        openAttachMessageList();
+        chooseAttachMessageItem(1);
             if (!imagesList.isEmpty()) {
                 imagesList.get(album).click();
                 for (int i = 0; i < count; ++i) {
@@ -373,7 +389,7 @@ public class DialogAndGroupPage extends MobilePage {
                 gallerySubmit.click();
                 previewSubmit.click();
             }
-        }
+
         return true;
     }
 

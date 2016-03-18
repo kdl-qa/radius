@@ -4,7 +4,7 @@ import com.radius.data_providers.ContactsDataProvider;
 import com.radius.drivers.Driver;
 import com.radius.helpers.AppData;
 import com.radius.pages.ContactsPage;
-import com.radius.pages.DialogAndGroupPage;
+import com.radius.pages.CreateDialogChatPage;
 import com.radius.pages.MobilePage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
@@ -30,7 +30,7 @@ public class Dialog {
     public static AndroidDriver driver;
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
-    DialogAndGroupPage chatsTester;
+    CreateDialogChatPage chatsTester;
     MobilePage mobileTester;
 
     @Title("This is - create Dialog suite")
@@ -39,7 +39,7 @@ public class Dialog {
         driver = Driver.initDriver();
         wait = new WebDriverWait(driver, 20);
         touchScreen = new TouchActions(driver);
-        chatsTester = new DialogAndGroupPage(driver, touchScreen);
+        chatsTester = new CreateDialogChatPage(driver, touchScreen);
     }
 
 
@@ -49,7 +49,7 @@ public class Dialog {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
 //        chatsTester.checkScreenTitle(CHATS_SCREEN, "Чаты");
-        chatsTester.createChat();
+        chatsTester.openCreateChatMembersList();
 //        chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, "Создать Чат");
         chatsTester.checkDisableCreateChatBtn();
         assertTrue(chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, "Создать Чат"));
@@ -63,7 +63,7 @@ public class Dialog {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
         chatsTester.checkScreenTitle(CHATS_SCREEN, "Чаты");
-        chatsTester.createChat();
+        chatsTester.openCreateChatMembersList();
         chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, "Создать Чат");
         chatsTester.checkContactPresence(mainContact1);
         contacts.tapOnContact(mainContact1);
@@ -77,7 +77,7 @@ public class Dialog {
         ContactsPage contacts = new ContactsPage(driver, touchScreen);
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(GROUP_TAB);
-        chatsTester.createChat();
+        chatsTester.openCreateChatMembersList();
 //        assertTrue(chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, "Создать Чат"));
         chatsTester.checkContactPresence(mainContact1);
         contacts.tapOnContact(mainContact1);
@@ -114,7 +114,7 @@ public class Dialog {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
         chatsTester.checkScreenTitle(CHATS_SCREEN, AppData.chatsScreenTitle);
-        chatsTester.createChat();
+        chatsTester.openCreateChatMembersList();
         chatsTester.checkScreenTitle(CREATE_CHAT_SCREEN, AppData.createChatScreenTitle);
         chatsTester.openActionTab(MAIN_CONTACTS_TAB);
         assertTrue(contacts.checkContactListTabs("main_profile"));

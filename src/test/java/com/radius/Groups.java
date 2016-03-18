@@ -1,7 +1,7 @@
 package com.radius;
 
 import com.radius.drivers.Driver;
-import com.radius.pages.DialogAndGroupPage;
+import com.radius.pages.CreateDialogChatPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,7 +17,7 @@ public class Groups {
     public static AndroidDriver driver;
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
-    DialogAndGroupPage groupTester;
+    CreateDialogChatPage groupTester;
 
     @Title("This is create Group suite")
     @BeforeClass
@@ -25,7 +25,7 @@ public class Groups {
         driver = Driver.initDriver();
         wait = new WebDriverWait(driver, 20);
         touchScreen = new TouchActions(driver);
-        groupTester = new DialogAndGroupPage(driver, touchScreen);
+        groupTester = new CreateDialogChatPage(driver, touchScreen);
     }
 
     @Test (groups = {"createGroup"}, priority = 0, enabled = false)

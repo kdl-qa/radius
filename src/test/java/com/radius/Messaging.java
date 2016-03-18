@@ -2,7 +2,7 @@ package com.radius;
 
 import com.radius.data_providers.ContactsDataProvider;
 import com.radius.drivers.Driver;
-import com.radius.pages.DialogAndGroupPage;
+import com.radius.pages.CreateDialogChatPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,14 +24,14 @@ public class Messaging {
     public static AndroidDriver driver;
     public static WebDriverWait wait;
     public static TouchActions touchScreen;
-    DialogAndGroupPage chatsTester;
+    CreateDialogChatPage chatsTester;
 
     @BeforeClass
     public void messaging() {
         driver = Driver.initDriver();
         wait = new WebDriverWait(driver, 15);
         touchScreen = new TouchActions(driver);
-        chatsTester = new DialogAndGroupPage(driver, touchScreen);
+        chatsTester = new CreateDialogChatPage(driver, touchScreen);
     }
 
     @Description("Send to dialog Geo message")
@@ -39,7 +39,7 @@ public class Messaging {
     public void dialogSendGeoMsg(String username) {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
-        chatsTester.openDialogByName(username);
+        chatsTester.openChatByName(username);
         chatsTester.checkScreenTitle(DIALOG_SCREEN, username);
         assertTrue(chatsTester.sendDialogGeo());
     }
@@ -50,7 +50,7 @@ public class Messaging {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
 //        assertTrue(chatsTester.openChatByIndex(1));
-        chatsTester.openDialogByName(username);
+        chatsTester.openChatByName(username);
         assertTrue(chatsTester.sendDialogImage(3, 1));
     }
 
@@ -59,7 +59,7 @@ public class Messaging {
     public void dialogSendTextMsg(String username) {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
-        chatsTester.openDialogByName(username);
+        chatsTester.openChatByName(username);
         assertTrue(chatsTester.sendDialogMsg());
     }
 
@@ -68,7 +68,7 @@ public class Messaging {
     public void checkDialogSendMsgStatus(String username) throws InterruptedException {
         chatsTester.openMenuItem(CHATS);
         chatsTester.openActionTab(DIALOG_TAB);
-        chatsTester.openDialogByName(username);
+        chatsTester.openChatByName(username);
         chatsTester.sendDialogMsg();
         assertTrue(chatsTester.checkSentMsgStatus());
     }

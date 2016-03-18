@@ -19,6 +19,19 @@ public class UserSettingsPage extends MobilePage {
     @FindBy(id = "exit_button")
     public WebElement logoutBtn;
 
+    @FindBy(id = "alertTitle")
+    public WebElement alert_title;
+
+    @FindBy(id = "message")
+    public WebElement alert_message;
+
+    @FindBy(id = "button1")
+    public WebElement alert_logout;
+
+    @FindBy(id = "button2")
+    public WebElement alert_cancel;
+
+
     /*----------------------------- Main Profile -------------------------------------------------*/
 
     @FindBy(id = "image_view_avatar_main")
@@ -69,6 +82,8 @@ public class UserSettingsPage extends MobilePage {
     @FindBy(id = "action_back_to_list")
     public static WebElement submitAvatarAction;
 
+
+    /*======================================== Methods =====================================================*/
 
     /**
      * Constructor
@@ -284,5 +299,18 @@ public class UserSettingsPage extends MobilePage {
         return true;
     }
 
+    /**
+     * Submit logout alert
+     */
+    public void checkLogoutAlertText() {
+//        waitForElement();
 
+    }
+
+    /**
+     * Check alert
+     */
+    public void alertSubmitLogout() {
+
+    }
 }

@@ -143,6 +143,9 @@ public class MobilePage {
         wait.until(elementToBeClickable(element));
     }
 
+    public void waitForListElements(List<WebElement> list) {
+        wait.until(visibilityOfAllElements(list));
+    }
 
 
 
@@ -281,11 +284,11 @@ public class MobilePage {
                 return s_text.getText().equalsIgnoreCase("Чаты");
             case VENUES:
                 sideBarMenuItems.get(1).click();
-//                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.actionTabs.get(1)));
+//                wait.until(ExpectedConditions.visibilityOf(CreateDialogChatPage.actionTabs.get(1)));
                 return s_text.getText().equalsIgnoreCase("Места");
             case CONTACTS:
                 sideBarMenuItems.get(2).click();
-//                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.actionTabs.get(2)));
+//                wait.until(ExpectedConditions.visibilityOf(CreateDialogChatPage.actionTabs.get(2)));
                 return s_text.getText().equalsIgnoreCase("Контакты");
             case SETTINGS:
                 sideBarMenuItems.get(3).click();
@@ -355,15 +358,15 @@ public class MobilePage {
 //    public boolean checkScreenTitle(ScreenTitles screenTitle, String expectedScreenTitle) {
 //        switch (screenTitle) {
 //            case CHATS_SCREEN:
-//                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.chatsScreenTitle));
+//                wait.until(ExpectedConditions.visibilityOf(CreateDialogChatPage.chatsScreenTitle));
 //                System.out.println("chats screen");
 //                return navTitle.getText().equals(expectedScreenTitle);
 //            case VENUE_SCREEN:
 //            case DIALOG_SCREEN:
 //            case GROUP_SCREEN:
-//                wait.until(ExpectedConditions.visibilityOf(DialogAndGroupPage.chatTitle));
+//                wait.until(ExpectedConditions.visibilityOf(CreateDialogChatPage.chatTitle));
 //                System.out.println("dialog / group / venues screen");
-//                return DialogAndGroupPage.chatTitle.getText().equals(expectedScreenTitle);
+//                return CreateDialogChatPage.chatTitle.getText().equals(expectedScreenTitle);
 //            case CREATE_CHAT_SCREEN:
 //            case CONTACTS_SCREEN:
 //            case CONTACT_PROFILE_SCREEN:
