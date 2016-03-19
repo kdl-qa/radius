@@ -17,5 +17,8 @@ public class AppData {
     public static String editProfileScreenTitle = "Редактирование профиля";
     public static String createPublicProfileScreenTitle = "Создание публичного профиля";
 
+    public static String logoutAlertText = "Вы действительно хотите выйти из своего аккаунта?";
+
+
 
 }

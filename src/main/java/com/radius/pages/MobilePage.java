@@ -25,9 +25,6 @@ public class MobilePage {
     /*===================================== Locators ===================================================*/
 
     /*------------------------------------ Navigation -------------------------------------------*/
-//
-//    @FindBy(name = "Чаты")
-//    public static WebElement chatsScreenTitle;
 
     /**
      * action bar tabs

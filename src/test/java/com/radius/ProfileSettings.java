@@ -164,12 +164,16 @@ public class ProfileSettings {
     @Test(groups = {"savePublicProfileAvatarEmpty"})
     public void logoutMessengerApp() {
         profiler.openMenuItem(SETTINGS);
-        profiler.logout();
+        profiler.tapLogoutButton();
+        profiler.checkLogoutAlertText();
+        profiler.logoutAlertDiscard();
+        profiler.tapLogoutButton();
+        profiler.logoutAlertSubmit();
     }
 
 
 
-        @AfterGroups(groups = {"", "", "", ""})
+    @AfterGroups(groups = {"", "", "", ""})
     public void navigateBack() {
         profiler.openMenuItem(CHATS);
     }

@@ -1,5 +1,6 @@
 package com.radius.pages;
 
+import com.radius.helpers.AppData;
 import com.radius.helpers.ScreenTitles;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.NoSuchElementException;
@@ -95,7 +96,7 @@ public class UserSettingsPage extends MobilePage {
     /**
      * Logout from messenger App
      */
-    public void logout() {
+    public void tapLogoutButton() {
         logoutBtn.click();
     }
 
@@ -300,17 +301,29 @@ public class UserSettingsPage extends MobilePage {
     }
 
     /**
-     * Submit logout alert
+     * Check tapLogoutButton alert title and message
      */
-    public void checkLogoutAlertText() {
-//        waitForElement();
-
+    public boolean checkLogoutAlertText() {
+        waitForElement(alert_title);
+        if (alert_message.getText().equalsIgnoreCase(AppData.logoutAlertText)) {
+            System.out.println("Alert message is correct");
+        }
+        return true;
     }
 
     /**
-     * Check alert
+     * Submit tapLogoutButton alert
      */
-    public void alertSubmitLogout() {
+    public void logoutAlertSubmit() {
+        waitForElement(alert_title);
+        alert_logout.click();
+    }
 
+    /**
+     * Discard tapLogoutButton alert
+     */
+    public void logoutAlertDiscard() {
+        waitForElement(alert_title);
+        alert_cancel.click();
     }
 }
