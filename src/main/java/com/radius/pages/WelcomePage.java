@@ -47,19 +47,19 @@ public class WelcomePage extends MobilePage {
     public boolean checkWelcomeTitle(int slide) {
         switch (slide){
             case 1:
-                welcomeSlide1.click();
+//                welcomeSlide1.click();
                 return slideTitle.getText().equalsIgnoreCase(AppData.welcomeTitle1);
             case 2:
-                welcomeSlide3.click();
+//                welcomeSlide3.click();
                 return slideTitle.getText().equalsIgnoreCase(AppData.welcomeTitle2);
             case 3:
-                welcomeSlide3.click();
+//                welcomeSlide3.click();
                 return slideTitle.getText().equalsIgnoreCase(AppData.welcomeTitle3);
             case 4:
-                welcomeSlide4.click();
+//                welcomeSlide4.click();
                 return slideTitle.getText().equalsIgnoreCase(AppData.welcomeTitle4);
             case 5:
-                welcomeSlide5.click();
+//                welcomeSlide5.click();
                 return slideTitle.getText().equalsIgnoreCase(AppData.welcomeTitle5);
             default:
                 return false;
@@ -70,6 +70,7 @@ public class WelcomePage extends MobilePage {
      * Check welcome slide text
      */
     public boolean checkWelcomeSlideText(int slide) {
+        //TODO: change a welcomeText to each slide when the design will be add
         switch (slide){
             case 1:
                 return slideText.getText().equalsIgnoreCase(AppData.welcomeText1);
@@ -90,7 +91,28 @@ public class WelcomePage extends MobilePage {
         startButton.click();
     }
 
-    
+    public void switchToSlide(int slide_index) {
+        switch (slide_index){
+            case 1:
+                welcomeSlide1.click();
+                break;
+            case 2:
+                welcomeSlide2.click();
+                break;
+            case 3:
+                welcomeSlide3.click();
+                break;
+            case 4:
+                welcomeSlide4.click();
+                break;
+            case 5:
+                welcomeSlide5.click();
+                break;
+            default:
+                System.out.println("Unknown slide index");
+                break;
+        }
+    }
 
 
 }

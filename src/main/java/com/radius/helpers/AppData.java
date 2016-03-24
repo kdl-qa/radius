@@ -31,10 +31,18 @@ public class AppData {
     public static String dialogSettingsScreenTitle = "Информация и настройки";
     public static String editProfileScreenTitle = "Редактирование профиля";
     public static String createPublicProfileScreenTitle = "Создание публичного профиля";
+    public static String loginPhoneScreenTitle = "Подтверждение телефона";
+    public static String loginCodeScreenTitle = "Код подтверждения";
+    public static String loginCountryScreenTitle = "Выберите страну";
+
 
     /*----------------------------------- Pop-up Text ---------------------------------------------*/
 
     public static String logoutAlertText = "Вы действительно хотите выйти из своего аккаунта?";
+
+    /*----------------------------------- Countries List ---------------------------------------------*/
+
+    public static String countryUkraine = "Україна (+380)";
 
 
 
